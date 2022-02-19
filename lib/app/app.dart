@@ -9,6 +9,7 @@ class App extends StatelessWidget {
       title: 'To Dev',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
+        primaryColor: Colors.blue,
         brightness: Brightness.dark,
       ),
       debugShowCheckedModeBanner: false,

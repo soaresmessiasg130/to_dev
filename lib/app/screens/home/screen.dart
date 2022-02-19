@@ -20,13 +20,49 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Text('HomeScreen'),
-            ElevatedButton(
-              onPressed: _pushTodos,
-              child: Text('View My Todos'),
+            Expanded(
+              flex: 1,
+              child: Container(
+                child: Text(
+                  'HomeScreen',
+                  style: TextStyle(
+                    backgroundColor: Colors.red,
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              color: Theme.of(context).primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: _pushTodos,
+                      child: Text('View My Todos'),
+                      style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(8)),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: _pushTodos,
+                      child: Text('Profile'),
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStateProperty.all(
+                          Theme.of(context).primaryColor,
+                        ),
+                        padding: MaterialStateProperty.all(EdgeInsets.all(8)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

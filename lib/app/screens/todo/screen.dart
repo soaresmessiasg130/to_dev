@@ -20,6 +20,7 @@ class _TodoScreenState extends State<TodoScreen> {
         onPressed: () {},
         tooltip: 'Add new dev todo...',
         child: Icon(Icons.add),
+        backgroundColor: Theme.of(context).primaryColor,
       ),
     );
   }
