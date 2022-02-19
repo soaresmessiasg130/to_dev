@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'home/home.dart';
+import 'package:to_dev/app/screens/home/screen.dart';
+import 'package:to_dev/app/screens/todo/screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -8,11 +8,15 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'To Dev',
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blueGrey,
         brightness: Brightness.dark,
       ),
-      home: Home(),
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/todos': (context) => TodoScreen(),
+      },
     );
   }
 }

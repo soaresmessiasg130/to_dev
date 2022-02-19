@@ -8,7 +8,7 @@ class TodoList extends StatefulWidget {
 }
 
 class _TodoListState extends State<TodoList> {
-  final _todoList = <String>['Olá', 'Mundo'];
+  final _todoList = <String>[];
 
   Widget _emptyList() {
     return Center(
@@ -16,7 +16,7 @@ class _TodoListState extends State<TodoList> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'Your to-do will appear here...',
+            'Your Todos will appear here...',
             style: Theme.of(context).textTheme.bodyText1,
           ),
         ],
@@ -24,7 +24,7 @@ class _TodoListState extends State<TodoList> {
     );
   }
 
-  ListView _buildTodoItems() {
+  ListView _buildList() {
     return ListView.separated(
       itemBuilder: (_, i) {
         return ListTile(
@@ -44,18 +44,12 @@ class _TodoListState extends State<TodoList> {
     );
   }
 
-  Widget _isAnyInList() {
-    _todoList.addAll(['Messias', 'Soares', 'Paiva', 'Pinho']);
-
-    return _buildTodoItems();
-  }
-
-  Widget _buildTodoList() {
-    return _todoList.isEmpty ? _emptyList() : _isAnyInList();
+  Widget _buildTodos() {
+    return _todoList.isEmpty ? _emptyList() : _buildList();
   }
 
   @override
   Widget build(BuildContext context) {
-    return _buildTodoList();
+    return _buildTodos();
   }
 }

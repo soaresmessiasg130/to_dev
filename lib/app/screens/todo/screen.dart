@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'todo-list.dart';
 
-class Home extends StatefulWidget {
-  Home({Key? key}) : super(key: key);
+class TodoScreen extends StatefulWidget {
+  TodoScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeState createState() => _HomeState();
+  _TodoScreenState createState() => _TodoScreenState();
 }
 
-class _HomeState extends State<Home> {
+class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To Dev'),
+        title: Text('My Todos'),
       ),
       body: TodoList(),
       floatingActionButton: FloatingActionButton(
