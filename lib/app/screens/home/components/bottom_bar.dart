@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class HomeBottomAppBar extends StatelessWidget {
+class BottomBarComponent extends StatelessWidget {
   final Function navigate;
 
-  const HomeBottomAppBar(this.navigate);
+  const BottomBarComponent(this.navigate);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class HomeBottomAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             IconButton(
-              onPressed: () => navigate(0),
+              onPressed: () => navigate('/dashboard'),
               color: Colors.white,
               padding: EdgeInsets.all(16),
               icon: Icon(
@@ -27,7 +27,7 @@ class HomeBottomAppBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () => navigate(1),
+              onPressed: () => navigate('/todo'),
               color: Colors.white,
               padding: EdgeInsets.all(16),
               icon: Icon(
@@ -35,7 +35,7 @@ class HomeBottomAppBar extends StatelessWidget {
               ),
             ),
             IconButton(
-              onPressed: () => navigate(2),
+              onPressed: () => navigate('/user'),
               color: Colors.white,
               padding: EdgeInsets.all(16),
               icon: Icon(

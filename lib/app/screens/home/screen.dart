@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:to_dev/app/screens/home/components/floating_button.dart';
 
-import 'components/home_bottom_app_bar.dart';
+import 'components/bottom_bar.dart';
 
+import 'contents/create_todo/content.dart';
 import 'contents/dashboard/content.dart';
-import 'contents/user/content.dart';
 import 'contents/todo/content.dart';
+import 'contents/user/content.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
@@ -14,23 +16,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _contentIndex = 0;
+  Widget _content = DashboardContent();
+  String _contentTitle = 'Dashboard';
 
-  static const List<Widget> _contents = [
-    DashboardContent(),
-    TodoContent(),
-    UserContent(),
-  ];
-
-  static const List<String> _titles = [
-    'Dashboard',
-    'Todos',
-    'User',
-  ];
+  static const Map<String, dynamic> _contents = {
+    '/dashboard': {
+      'title': 'Dashboard',
+      'content': DashboardContent(),
+    },
+    '/todo': {
+      'title': 'My to-do\'s',
+      'content': TodoContent(),
+    },
+    '/create-todo': {
+      'title': 'Create to-do',
+      'content': CreateTodoContent(),
+    },
+    '/user': {
+      'title': 'User preferences',
+      'content': UserContent(),
+    },
+  };
 
   void _navigate(value) {
     setState(() {
-      _contentIndex = value;
+      _contentTitle = _contents[value]['title'];
+      _content = _contents[value]['content'];
     });
   }
 
@@ -39,23 +50,15 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _titles.elementAt(_contentIndex),
+          _contentTitle,
         ),
       ),
       body: Center(
-        child: _contents.elementAt(_contentIndex),
+        child: _content,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Create',
-        backgroundColor: Theme.of(context).primaryColor,
-        foregroundColor: Colors.white,
-        child: Icon(
-          Icons.add,
-        ),
-      ),
+      floatingActionButton: FloatingButtonComponent(_navigate),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      bottomNavigationBar: HomeBottomAppBar(_navigate),
+      bottomNavigationBar: BottomBarComponent(_navigate),
     );
   }
 }
