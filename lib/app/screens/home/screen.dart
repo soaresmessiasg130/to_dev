@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 import 'components/home_bottom_app_bar.dart';
 
+import 'contents/dashboard/content.dart';
+import 'contents/user/content.dart';
+import 'contents/todo/content.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
@@ -10,17 +14,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _navIndex = 0;
+  int _contentIndex = 0;
 
-  static const List<Widget> _list = [
-    Text('Index 0: Home'),
-    Text('Index 1: Todos'),
-    Text('Index 2: Profile'),
+  static const List<Widget> _contents = [
+    DashboardContent(),
+    TodoContent(),
+    UserContent(),
   ];
 
-  void _navigate() {
+  static const List<String> _titles = [
+    'Dashboard',
+    'Todos',
+    'User',
+  ];
+
+  void _navigate(value) {
     setState(() {
-      _navIndex = 1;
+      _contentIndex = value;
     });
   }
 
@@ -28,10 +38,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To Dev'),
+        title: Text(
+          _titles.elementAt(_contentIndex),
+        ),
       ),
       body: Center(
-        child: _list.elementAt(_navIndex),
+        child: _contents.elementAt(_contentIndex),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

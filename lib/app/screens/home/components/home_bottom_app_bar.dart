@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class HomeBottomAppBar extends StatelessWidget {
-  final VoidCallback navigate;
+  final Function navigate;
 
   const HomeBottomAppBar(this.navigate);
 
@@ -18,64 +18,33 @@ class HomeBottomAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            TextButton(
-              onPressed: () {},
-              child: IconButton(
-                onPressed: navigate,
-                color: Colors.white,
-                padding: EdgeInsets.all(16),
-                icon: Icon(
-                  Icons.home,
-                ),
+            IconButton(
+              onPressed: () => navigate(0),
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              icon: Icon(
+                Icons.dashboard,
               ),
             ),
-            TextButton(
-              onPressed: () {},
-              child: IconButton(
-                onPressed: navigate,
-                color: Colors.white,
-                padding: EdgeInsets.all(16),
-                icon: Icon(
-                  Icons.list,
-                ),
+            IconButton(
+              onPressed: () => navigate(1),
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              icon: Icon(
+                Icons.format_list_bulleted,
               ),
             ),
-            TextButton(
-              onPressed: () {},
-              child: IconButton(
-                onPressed: navigate,
-                color: Colors.white,
-                padding: EdgeInsets.all(16),
-                icon: Icon(
-                  Icons.person,
-                ),
+            IconButton(
+              onPressed: () => navigate(2),
+              color: Colors.white,
+              padding: EdgeInsets.all(16),
+              icon: Icon(
+                Icons.person,
               ),
             )
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigationBar(
-      //   currentIndex: 0,
-      //   onTap: (index) {
-      //     setState(() {
-      //       _navIndex = index;
-      //     });
-      //   },
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.home),
-      //       label: 'Home',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.list),
-      //       label: 'Todos',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       icon: Icon(Icons.person),
-      //       label: 'Profile',
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

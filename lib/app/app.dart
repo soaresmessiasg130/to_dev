@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:to_dev/app/screens/home/screen.dart';
-import 'package:to_dev/app/screens/todo/screen.dart';
 
 class App extends StatelessWidget {
   @override
@@ -16,7 +15,6 @@ class App extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => HomeScreen(),
-        '/todos': (context) => TodoScreen(),
       },
     );
   }
