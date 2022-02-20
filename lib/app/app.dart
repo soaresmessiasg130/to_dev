@@ -8,7 +8,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'To Dev',
       theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
+        primarySwatch: Colors.blue,
         primaryColor: Colors.blue,
         brightness: Brightness.dark,
       ),

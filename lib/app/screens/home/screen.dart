@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'components/home_bottom_app_bar.dart';
+
 class HomeScreen extends StatefulWidget {
   HomeScreen({Key? key}) : super(key: key);
 
@@ -8,8 +10,18 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  void _pushTodos() {
-    Navigator.pushNamed(context, '/todos');
+  int _navIndex = 0;
+
+  static const List<Widget> _list = [
+    Text('Index 0: Home'),
+    Text('Index 1: Todos'),
+    Text('Index 2: Profile'),
+  ];
+
+  void _navigate() {
+    setState(() {
+      _navIndex = 1;
+    });
   }
 
   @override
@@ -19,54 +31,19 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text('To Dev'),
       ),
       body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Expanded(
-              flex: 1,
-              child: Container(
-                child: Text(
-                  'HomeScreen',
-                  style: TextStyle(
-                    backgroundColor: Colors.red,
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              color: Theme.of(context).primaryColor,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                    child: TextButton(
-                      onPressed: _pushTodos,
-                      child: Text('View My Todos'),
-                      style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.black),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(8)),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: _pushTodos,
-                      child: Text('Profile'),
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStateProperty.all(
-                          Theme.of(context).primaryColor,
-                        ),
-                        padding: MaterialStateProperty.all(EdgeInsets.all(8)),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+        child: _list.elementAt(_navIndex),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        tooltip: 'Create',
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+        child: Icon(
+          Icons.add,
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      bottomNavigationBar: HomeBottomAppBar(_navigate),
     );
   }
 }
