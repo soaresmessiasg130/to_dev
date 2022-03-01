@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class TodoList extends StatefulWidget {
-  const TodoList({Key? key}) : super(key: key);
+class ListSeparated extends StatefulWidget {
+  const ListSeparated({Key? key}) : super(key: key);
 
   @override
-  _TodoListState createState() => _TodoListState();
+  State<ListSeparated> createState() => _ListSeparatedState();
 }
 
-class _TodoListState extends State<TodoList> {
+class _ListSeparatedState extends State<ListSeparated> {
   final _todoList = <String>[];
 
   Widget _emptyList() {

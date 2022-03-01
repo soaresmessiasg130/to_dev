@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class FloatingButtonComponent extends StatelessWidget {
-  final Function navigate;
+class FloatingButton extends StatelessWidget {
+  const FloatingButton({Key? key, required this.tooltip, required this.onTap})
+      : super(key: key);
 
-  const FloatingButtonComponent(this.navigate);
+  final String tooltip;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => navigate('/create-todo'),
+      onPressed: () => {},
       tooltip: 'Create to-do',
       backgroundColor: Theme.of(context).primaryColor,
       foregroundColor: Colors.white,
