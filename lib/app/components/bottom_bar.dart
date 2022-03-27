@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class BottomBar extends StatelessWidget {
   const BottomBar({Key? key, required this.buttons}) : super(key: key);
 
-  final List<IconButton> buttons;
+  final List<Widget> buttons;
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +15,7 @@ class BottomBar extends StatelessWidget {
           color: Theme.of(context).colorScheme.primary,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: buttons,
         ),
       ),

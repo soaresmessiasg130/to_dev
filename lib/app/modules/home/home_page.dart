@@ -50,6 +50,18 @@ class HomePageState extends State<HomePage> {
               Icons.format_list_bulleted,
             ),
           ),
+          Container(
+            width: 10,
+            height: 10,
+          ),
+          IconButton(
+            onPressed: () {},
+            color: Colors.white,
+            padding: EdgeInsets.all(16),
+            icon: Icon(
+              Icons.search,
+            ),
+          ),
           IconButton(
             onPressed: () {},
             color: Colors.white,
@@ -60,7 +72,7 @@ class HomePageState extends State<HomePage> {
           )
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
