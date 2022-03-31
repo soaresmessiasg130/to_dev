@@ -4,8 +4,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 class AppWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Modular.setInitialRoute('/test1');
+
     return MaterialApp.router(
-      title: 'To Dev - Messias Soares',
+      title: 'To Dev',
       theme: ThemeData(
         primarySwatch: Colors.blueGrey,
         brightness: Brightness.dark,
