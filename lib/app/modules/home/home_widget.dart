@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:to_dev/app/components/bottom_bar.dart';
 import 'package:to_dev/app/components/floating_button.dart';
 
@@ -19,8 +20,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: Column(
         children: [
           Expanded(
-            // child: RouterOutlet(),
-            child: Text('Hello, world!!!'),
+            child: RouterOutlet(),
           ),
         ],
       ),
