@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class BottomBar extends StatelessWidget {
   BottomBar({Key? key}) : super(key: key);
 
   final List<Widget> buttons = [
     IconButton(
-      onPressed: () {},
+      onPressed: () => Modular.to.navigate('dashboard'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
       icon: Icon(
@@ -13,19 +14,18 @@ class BottomBar extends StatelessWidget {
       ),
     ),
     IconButton(
-      onPressed: () {},
+      onPressed: () => Modular.to.navigate('todos'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
       icon: Icon(
         Icons.format_list_bulleted,
       ),
     ),
-    Container(
-      width: 10,
-      height: 10,
+    SizedBox(
+      width: 24,
     ),
     IconButton(
-      onPressed: () {},
+      onPressed: () => Modular.to.navigate('search'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
       icon: Icon(
@@ -33,7 +33,7 @@ class BottomBar extends StatelessWidget {
       ),
     ),
     IconButton(
-      onPressed: () {},
+      onPressed: () => Modular.to.navigate('profile'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
       icon: Icon(

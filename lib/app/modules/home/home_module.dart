@@ -12,7 +12,7 @@ class HomeModule extends Module {
   @override
   final List<ModularRoute> routes = [
     ChildRoute(
-      '/home',
+      '/',
       child: (context, args) => HomeWidget(),
       children: [
         ChildRoute('/dashboard', child: (context, args) => DashboardWidget()),
