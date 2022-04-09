@@ -6,6 +6,7 @@ class BottomBar extends StatelessWidget {
 
   final List<Widget> buttons = [
     IconButton(
+      tooltip: 'Dashboard',
       onPressed: () => Modular.to.navigate('dashboard'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
@@ -14,6 +15,7 @@ class BottomBar extends StatelessWidget {
       ),
     ),
     IconButton(
+      tooltip: 'Todos',
       onPressed: () => Modular.to.navigate('todos'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
@@ -25,6 +27,7 @@ class BottomBar extends StatelessWidget {
       width: 24,
     ),
     IconButton(
+      tooltip: 'Search',
       onPressed: () => Modular.to.navigate('search'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
@@ -33,6 +36,7 @@ class BottomBar extends StatelessWidget {
       ),
     ),
     IconButton(
+      tooltip: 'Profile',
       onPressed: () => Modular.to.navigate('profile'),
       color: Colors.white,
       padding: EdgeInsets.all(16),
