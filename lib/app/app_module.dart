@@ -36,13 +36,7 @@ class HomeWidgetState extends State<HomeWidget> {
       body: Column(
         children: [
           Expanded(
-            child: Text('csaccsas'),
-          ),
-          Expanded(
             child: RouterOutlet(),
-          ),
-          Expanded(
-            child: Text('csaccsas'),
           ),
         ],
       ),
@@ -68,26 +62,10 @@ class HomeWidget1 extends StatefulWidget {
 class HomeWidget1State extends State<HomeWidget1> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+    return Container(
+      child: Center(
+        child: Text('Hello, World!!!'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Text('csaccsas'),
-          ),
-          Expanded(
-            child: Text('csaccsas'),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingButton(
-        onTap: () {},
-        tooltip: 'Create an to-do',
-      ),
-      bottomNavigationBar: BottomBar(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
     );
   }
 }
