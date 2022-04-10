@@ -26,3 +26,24 @@ Future<List<User>> getUsers() async {
     ),
   );
 }
+
+Future<void> updateUser(User user) async {
+  final db = await getAuthDatabase();
+
+  await db.update(
+    'users',
+    user.toMap(),
+    where: 'id = ?',
+    whereArgs: [user.id],
+  );
+}
+
+Future<void> deleteUser(int id) async {
+  final db = await getAuthDatabase();
+
+  await db.delete(
+    'users',
+    where: 'id = ?',
+    whereArgs: [id],
+  );
+}
