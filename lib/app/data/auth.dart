@@ -1,17 +1,31 @@
+import 'dart:async';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:to_dev/app/data/ddl.dart';
 
-Future<Database> getAuthDatabase() async {
-  final String userDDL = getUserDDL();
+class MainDatabase {
+  MainDatabase._privateConstructor();
 
-  final authDatabase = openDatabase(
-    join(await getDatabasesPath(), 'auth_database.db'),
-    onCreate: (db, version) {
-      return db.execute(userDDL);
-    },
-    version: 1,
-  );
+  static final MainDatabase instance = MainDatabase._privateConstructor();
 
-  return authDatabase;
+  final String mainDatabaseName = 'main_database.db';
+
+  static Database? _database;
+
+  Future<Database> get database async => _database ??= await _initDatabase();
+
+  Future<Database> _initDatabase() async {
+    final path = join(await getDatabasesPath(), mainDatabaseName);
+
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _onCreateDatabase,
+    );
+  }
+
+  Future<void> _onCreateDatabase(Database db, int version) async {
+    await db.execute(getUserDDL());
+  }
 }

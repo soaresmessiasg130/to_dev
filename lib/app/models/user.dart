@@ -1,21 +1,29 @@
-class User {
+import 'package:to_dev/app/interfaces/imodel.dart';
+
+class User extends IModel {
   final int id;
   final String email;
   final String fullName;
 
-  const User({
+  User({
     required this.id,
     required this.email,
     required this.fullName,
-  });
-
-  Map<String, dynamic> toMap() {
-    return {
+  }) {
+    fields = {
       'id': id,
       'email': email,
       'fullName': fullName,
     };
   }
+
+  // Map<String, dynamic> toMap() {
+  //   return {
+  //     'id': id,
+  //     'email': email,
+  //     'fullName': fullName,
+  //   };
+  // }
 
   @override
   String toString() {
