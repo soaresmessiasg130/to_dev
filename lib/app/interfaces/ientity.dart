@@ -1,7 +1,13 @@
 abstract class IEntity {
   int? id;
+  DateTime? created;
+  DateTime? updated;
 
-  IEntity({int? this.id});
+  IEntity({
+    int? this.id,
+    DateTime? this.created,
+    DateTime? this.updated,
+  });
 
   List<String> getFields() => [];
 
@@ -10,10 +16,4 @@ abstract class IEntity {
   IEntity fromMap(Map<String, dynamic> map);
 
   String toString() => 'Entity()';
-
-  final String tableName = 'entity';
-
-  final String ddl = '''
-    CREATE TABLE entity (id INTEGER PRIMARY KEY)
-  ''';
 }

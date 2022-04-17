@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:to_dev/app/databases/main_database.dart';
-import 'package:to_dev/app/models/user.dart';
+import 'package:to_dev/app/entities/user.dart';
 import 'package:to_dev/app/repositories/repository.dart';
 
 class ProfileWidget extends StatefulWidget {
@@ -29,13 +29,13 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       model: User(),
     );
 
-    await repo.create(
-      User(
-        id: 1,
-        name: 'Messias',
-        email: 'soaresmessiasg130@gmail.com',
-      ),
-    );
+    // await repo.create(
+    //   User(
+    //     id: 1,
+    //     name: 'Messias',
+    //     email: 'soaresmessiasg130@gmail.com',
+    //   ),
+    // );
 
     var newUser = await repo.getOne(1);
 

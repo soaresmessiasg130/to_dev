@@ -1,4 +1,4 @@
-import 'package:to_dev/app/models/todo.dart';
+import 'package:to_dev/app/entities/todo.dart';
 
 class Project {
   final int id;

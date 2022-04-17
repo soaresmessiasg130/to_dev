@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:to_dev/app/models/user.dart';
 
 class MainDatabase {
   MainDatabase._privateConstructor();
@@ -22,12 +21,40 @@ class MainDatabase {
       path,
       version: 1,
       onCreate: _onCreateDatabase,
+      onUpgrade: _onUpdateDatabase,
     );
   }
 
   Future<void> _onCreateDatabase(Database db, int version) async {
-    String userDDL = User().ddl;
+    String ddl = '''
+      CREATE TABLE users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        email TEXT, 
+        name TEXT,
+        created INTEGER,
+        updated INTEGER
+      );
 
-    await db.execute(userDDL);
+      CREATE TABLE todos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT, 
+        desc TEXT,
+        status TEXT,
+        start INTEGER,
+        end INTEGER,
+        created INTEGER,
+        updated INTEGER
+      );
+    ''';
+
+    await db.execute(ddl);
+  }
+
+  FutureOr<void> _onUpdateDatabase(
+      Database db, int oldVersion, int newVersion) async {
+    String ddl = '''
+      
+    ''';
+
+    await db.execute(ddl);
   }
 }
