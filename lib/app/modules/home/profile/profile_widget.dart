@@ -1,19 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:to_dev/app/interfaces/imodel.dart';
+import 'package:to_dev/app/databases/main_database.dart';
 import 'package:to_dev/app/models/user.dart';
+import 'package:to_dev/app/repositories/repository.dart';
 
-class ProfileWidget extends StatelessWidget {
+class ProfileWidget extends StatefulWidget {
   const ProfileWidget({Key? key}) : super(key: key);
 
+  @override
+  State<ProfileWidget> createState() => _ProfileWidgetState();
+}
+
+class _ProfileWidgetState extends State<ProfileWidget> {
+  Map<String, dynamic> user = {};
+
   void onPressButton() async {
-    IModel model = User(
-      id: 1,
-      email: 'soaresmessiasg130@gmail.com',
-      fullName: 'Messias Soares',
+    print('Pressed');
+
+    final db = await MainDatabase.instance.database;
+
+    Repository<User> repo = Repository<User>(
+      db: db,
+      tableName: 'users',
     );
 
-    print(model.toString());
-    print(model.toMap());
+    await repo.create(User(
+      name: 'Messias Soares',
+      email: 'soaresmessiasg130@gmail.com',
+    ));
+
+    final newUser = await repo.getOne(1);
+
+    if (newUser != null) {
+      setState(() {
+        user = newUser;
+      });
+    }
   }
 
   @override
@@ -24,7 +45,7 @@ class ProfileWidget extends StatelessWidget {
           Text('Profile'),
           ElevatedButton(
             onPressed: onPressButton,
-            child: Text('Delete my Account'),
+            child: Text('Press here ${user['name']}'),
           ),
         ],
       ),

@@ -1,32 +1,17 @@
 import 'package:to_dev/app/interfaces/imodel.dart';
 
 class User extends IModel {
-  final int id;
+  final String name;
   final String email;
-  final String fullName;
 
-  User({
-    required this.id,
-    required this.email,
-    required this.fullName,
-  }) {
-    fields = {
-      'id': id,
-      'email': email,
-      'fullName': fullName,
-    };
-  }
-
-  // Map<String, dynamic> toMap() {
-  //   return {
-  //     'id': id,
-  //     'email': email,
-  //     'fullName': fullName,
-  //   };
-  // }
+  User({required this.name, required this.email, int? id}) : super(id: id);
 
   @override
-  String toString() {
-    return 'User{id: $id, email: $email, fullName: $fullName}';
-  }
+  List<String> getFields() => ['id', 'name', 'email'];
+
+  @override
+  Map<String, dynamic> toMap() => {'id': id, 'name': name, 'email': email};
+
+  @override
+  String toString() => 'User()';
 }

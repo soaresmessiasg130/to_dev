@@ -1,12 +1,11 @@
 abstract class IModel {
-  Map<String, dynamic> fields = {};
+  int? id;
 
-  Map<String, dynamic> toMap() {
-    return fields;
-  }
+  IModel({int? this.id});
 
-  // @override
-  // String toString() {
-  //   return 'User{id: $id, email: $email, fullName: $fullName}';
-  // }
+  List<String> getFields() => [];
+
+  Map<String, dynamic> toMap() => {};
+
+  String toString() => 'Model()';
 }
