@@ -11,30 +11,41 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
-  Map<String, dynamic> user = {};
+  User? user;
 
-  void onPressButton() async {
-    print('Pressed');
+  @override
+  void initState() {
+    super.initState();
 
-    final db = await MainDatabase.instance.database;
+    getUserData();
+  }
 
-    Repository<User> repo = Repository<User>(
+  Future<void> getUserData() async {
+    var db = await MainDatabase.instance.database;
+
+    var repo = Repository<User>(
       db: db,
       tableName: 'users',
+      model: User(),
     );
 
-    await repo.create(User(
-      name: 'Messias Soares',
-      email: 'soaresmessiasg130@gmail.com',
-    ));
+    await repo.create(
+      User(
+        id: 1,
+        name: 'Messias',
+        email: 'soaresmessiasg130@gmail.com',
+      ),
+    );
 
-    final newUser = await repo.getOne(1);
+    var newUser = await repo.getOne(1);
 
-    if (newUser != null) {
-      setState(() {
-        user = newUser;
-      });
-    }
+    // print(newUser?.toMap());
+
+    // repo.deleteAll();
+
+    setState(() {
+      user = newUser;
+    });
   }
 
   @override
@@ -44,8 +55,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
         children: [
           Text('Profile'),
           ElevatedButton(
-            onPressed: onPressButton,
-            child: Text('Press here ${user['name']}'),
+            onPressed: () {},
+            child: Text('Press here ${user?.name}'),
           ),
         ],
       ),

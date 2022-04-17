@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:to_dev/app/models/user.dart';
 
 class MainDatabase {
   MainDatabase._privateConstructor();
@@ -25,7 +26,8 @@ class MainDatabase {
   }
 
   Future<void> _onCreateDatabase(Database db, int version) async {
-    await db.execute(
-        'CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT, name TEXT)');
+    String userDDL = User().ddl;
+
+    await db.execute(userDDL);
   }
 }
