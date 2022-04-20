@@ -32,7 +32,7 @@ class Repository<T extends IEntity> implements IRepository<T> {
       whereArgs: [id],
     );
 
-    if (res.length > 0) {
+    if (res.isNotEmpty) {
       return model.fromMap(res.first) as T;
     }
 

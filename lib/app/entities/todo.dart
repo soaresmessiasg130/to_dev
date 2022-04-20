@@ -3,15 +3,15 @@ import 'package:to_dev/app/interfaces/ientity.dart';
 
 class Todo extends IEntity {
   String? desc;
-  Status status = Status.Waiting;
+  Status status = Status.waiting;
   DateTime? start;
   DateTime? end;
 
   Todo({
-    String? desc,
-    Status status = Status.Waiting,
-    DateTime? start,
-    DateTime? end,
+    this.desc,
+    this.status = Status.waiting,
+    this.start,
+    this.end,
     int? id,
     DateTime? created,
     DateTime? updated,
@@ -19,12 +19,7 @@ class Todo extends IEntity {
           id: id,
           created: created,
           updated: updated,
-        ) {
-    this.desc = desc;
-    this.status = status;
-    this.start = start;
-    this.end = end;
-  }
+        );
 
   @override
   List<String> getFields() => [

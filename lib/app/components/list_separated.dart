@@ -38,7 +38,7 @@ class _ListSeparatedState extends State<ListSeparated> {
           ),
         );
       },
-      separatorBuilder: (_, i) => Divider(),
+      separatorBuilder: (_, i) => const Divider(),
       itemCount: _todoList.length,
       addAutomaticKeepAlives: false,
     );

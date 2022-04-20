@@ -5,8 +5,8 @@ class User extends IEntity {
   String? email;
 
   User({
-    String? name,
-    String? email,
+    this.name,
+    this.email,
     DateTime? created,
     DateTime? updated,
     int? id,
@@ -14,10 +14,7 @@ class User extends IEntity {
           id: id,
           created: created,
           updated: updated,
-        ) {
-    this.name = name;
-    this.email = email;
-  }
+        );
 
   @override
   List<String> getFields() => ['id', 'name', 'email'];

@@ -4,9 +4,9 @@ abstract class IEntity {
   DateTime? updated;
 
   IEntity({
-    int? this.id,
-    DateTime? this.created,
-    DateTime? this.updated,
+    this.id,
+    this.created,
+    this.updated,
   });
 
   List<String> getFields() => [];
@@ -15,5 +15,6 @@ abstract class IEntity {
 
   IEntity fromMap(Map<String, dynamic> map);
 
+  @override
   String toString() => 'Entity()';
 }

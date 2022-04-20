@@ -15,10 +15,10 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('To Dev'),
+        title: const Text('To Dev'),
       ),
       body: Column(
-        children: [
+        children: const [
           Expanded(
             child: RouterOutlet(),
           ),

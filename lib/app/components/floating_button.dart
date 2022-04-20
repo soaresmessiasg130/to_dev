@@ -14,7 +14,7 @@ class FloatingButton extends StatelessWidget {
       tooltip: 'Create to-do',
       backgroundColor: Theme.of(context).primaryColor,
       foregroundColor: Colors.white,
-      child: Icon(
+      child: const Icon(
         Icons.add,
       ),
     );

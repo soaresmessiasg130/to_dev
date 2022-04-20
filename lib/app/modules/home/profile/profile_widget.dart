@@ -29,23 +29,25 @@ class _ProfileWidgetState extends State<ProfileWidget> {
       model: User(),
     );
 
-    // await repo.create(
-    //   User(
-    //     id: 1,
-    //     name: 'Messias',
-    //     email: 'soaresmessiasg130@gmail.com',
-    //   ),
-    // );
+    var userFromDb = await repo.getOne(1);
 
-    var newUser = await repo.getOne(1);
+    if (userFromDb == null) {
+      User newUser = User(
+        id: 1,
+        name: 'Messias',
+        email: 'soaresmessiasg130@gmail.com',
+      );
 
-    // print(newUser?.toMap());
+      await repo.create(newUser);
 
-    // repo.deleteAll();
-
-    setState(() {
-      user = newUser;
-    });
+      setState(() {
+        user = newUser;
+      });
+    } else {
+      setState(() {
+        user = userFromDb;
+      });
+    }
   }
 
   @override
@@ -53,7 +55,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
     return Center(
       child: Column(
         children: [
-          Text('Profile'),
+          const Text('Profile'),
           ElevatedButton(
             onPressed: () {},
             child: Text('Press here ${user?.name}'),

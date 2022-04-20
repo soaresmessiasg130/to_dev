@@ -13,12 +13,13 @@ class HomeModule extends Module {
   final List<ModularRoute> routes = [
     ChildRoute(
       '/',
-      child: (context, args) => HomeWidget(),
+      child: (context, args) => const HomeWidget(),
       children: [
-        ChildRoute('/dashboard', child: (context, args) => DashboardWidget()),
-        ChildRoute('/todos', child: (context, args) => TodosWidget()),
-        ChildRoute('/search', child: (context, args) => SearchWidget()),
-        ChildRoute('/profile', child: (context, args) => ProfileWidget()),
+        ChildRoute('/dashboard',
+            child: (context, args) => const DashboardWidget()),
+        ChildRoute('/todos', child: (context, args) => const TodosWidget()),
+        ChildRoute('/search', child: (context, args) => const SearchWidget()),
+        ChildRoute('/profile', child: (context, args) => const ProfileWidget()),
       ],
     ),
   ];

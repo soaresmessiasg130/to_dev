@@ -34,7 +34,6 @@ class MainDatabase {
         created INTEGER,
         updated INTEGER
       );
-
       CREATE TABLE todos (
         id INTEGER PRIMARY KEY AUTOINCREMENT, 
         desc TEXT,

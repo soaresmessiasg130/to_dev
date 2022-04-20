@@ -1,8 +1,8 @@
 enum Status {
-  Waiting,
-  Started,
-  Resolved,
-  Done,
-  Canceled,
-  Deleted,
+  waiting,
+  started,
+  resolved,
+  done,
+  canceled,
+  deleted,
 }
