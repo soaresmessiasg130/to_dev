@@ -1,7 +1,7 @@
 abstract class IEntity {
   int? id;
-  DateTime? created;
-  DateTime? updated;
+  DateTime? created = DateTime.now();
+  DateTime? updated = DateTime.now();
 
   IEntity({
     this.id,

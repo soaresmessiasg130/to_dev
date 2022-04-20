@@ -54,11 +54,19 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text('Profile'),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text('Press here ${user?.name}'),
+          Text(
+            user?.name ?? '',
+            style: const TextStyle(
+              fontSize: 24,
+            ),
+          ),
+          Text(
+            user?.email ?? '',
+            style: const TextStyle(
+              fontSize: 18,
+            ),
           ),
         ],
       ),

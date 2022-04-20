@@ -26,17 +26,21 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<T?> getOne(int id) async {
-    final res = await db.query(
-      tableName,
-      where: 'id = ?',
-      whereArgs: [id],
-    );
+    try {
+      var res = await db.query(
+        tableName,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
 
-    if (res.isNotEmpty) {
-      return model.fromMap(res.first) as T;
+      if (res.isNotEmpty) {
+        return model.fromMap(res.first) as T;
+      }
+
+      return null;
+    } catch (e) {
+      return null;
     }
-
-    return null;
   }
 
   @override

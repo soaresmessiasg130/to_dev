@@ -33,8 +33,12 @@ class User extends IEntity {
     id = map['id'];
     name = map['name'];
     email = map['email'];
-    created = DateTime.fromMillisecondsSinceEpoch(map['created']);
-    updated = DateTime.fromMillisecondsSinceEpoch(map['updated']);
+    created = map['created'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
+        : DateTime.now();
+    updated = map['updated'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
+        : DateTime.now();
 
     return this;
   }

@@ -4,8 +4,8 @@ import 'package:to_dev/app/interfaces/ientity.dart';
 class Todo extends IEntity {
   String? desc;
   Status status = Status.waiting;
-  DateTime? start;
-  DateTime? end;
+  DateTime? start = DateTime.now();
+  DateTime? end = DateTime.now().add(const Duration(days: 1));
 
   Todo({
     this.desc,
@@ -48,10 +48,18 @@ class Todo extends IEntity {
     id = map['id'];
     desc = map['desc'];
     status = map['status'];
-    start = DateTime.fromMillisecondsSinceEpoch(map['start']);
-    end = DateTime.fromMillisecondsSinceEpoch(map['end']);
-    created = DateTime.fromMillisecondsSinceEpoch(map['created']);
-    updated = DateTime.fromMillisecondsSinceEpoch(map['updated']);
+    start = map['start'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['start'])
+        : DateTime.now();
+    end = map['end'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['end'])
+        : DateTime.now();
+    created = map['created'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
+        : DateTime.now();
+    updated = map['updated'] == Null
+        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
+        : DateTime.now();
 
     return this;
   }
