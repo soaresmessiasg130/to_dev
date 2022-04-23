@@ -16,16 +16,16 @@ class HomeWidget extends StatefulWidget {
 class _HomeWidgetState extends State<HomeWidget> {
   void onPressedFloatingButton(BuildContext context) {
     Provider.of<TodoService>(context, listen: false).add(
-      Todo(
-        id: 1,
-      ),
+      Todo(id: 1),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TodoService(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TodoService()),
+      ],
       child: Scaffold(
         appBar: AppBar(
           title: const Text('To Dev'),
