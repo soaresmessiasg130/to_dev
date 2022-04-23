@@ -26,34 +26,68 @@ class MainDatabase {
   }
 
   Future<void> _onCreateDatabase(Database db, int version) async {
-    String ddl = '''
-      CREATE TABLE users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        email TEXT, 
-        name TEXT,
-        created INTEGER,
-        updated INTEGER
-      );
-      CREATE TABLE todos (
-        id INTEGER PRIMARY KEY AUTOINCREMENT, 
-        desc TEXT,
-        status TEXT,
-        start INTEGER,
-        end INTEGER,
-        created INTEGER,
-        updated INTEGER
-      );
-    ''';
+    String ddl = '''''';
 
-    await db.execute(ddl);
+    switch (version) {
+      case 1:
+        ddl = '''
+          CREATE TABLE users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            email TEXT, 
+            name TEXT,
+            created INTEGER,
+            updated INTEGER
+          );
+          CREATE TABLE todos (
+            id INTEGER PRIMARY KEY AUTOINCREMENT, 
+            desc TEXT,
+            status TEXT,
+            start INTEGER,
+            end INTEGER,
+            created INTEGER,
+            updated INTEGER
+          );
+        ''';
+        break;
+    }
+
+    if (ddl.isNotEmpty) {
+      await db.execute(ddl);
+    }
   }
 
   FutureOr<void> _onUpdateDatabase(
       Database db, int oldVersion, int newVersion) async {
-    String ddl = '''
-      
-    ''';
+    if (newVersion > oldVersion) {
+      // make update
+      String ddl = '''''';
 
-    await db.execute(ddl);
+      switch (newVersion) {
+        case 1:
+          ddl = '''
+            CREATE TABLE users (
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              email TEXT, 
+              name TEXT,
+              created INTEGER,
+              updated INTEGER
+            );
+            CREATE TABLE todos (
+              id INTEGER PRIMARY KEY AUTOINCREMENT, 
+              desc TEXT,
+              status TEXT,
+              start INTEGER,
+              end INTEGER,
+              created INTEGER,
+              updated INTEGER
+            );
+          ''';
+          break;
+      }
+
+      await db.execute(ddl);
+    } else if (newVersion < oldVersion) {
+      // make downgrade
+    }
   }
 }
