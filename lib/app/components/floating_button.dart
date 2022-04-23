@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class FloatingButton extends StatelessWidget {
-  const FloatingButton({Key? key, required this.tooltip, required this.onTap})
-      : super(key: key);
-
   final String tooltip;
-  final Function onTap;
+  final void Function(BuildContext context) onPressed;
+
+  const FloatingButton({
+    Key? key,
+    required this.tooltip,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () => {},
-      tooltip: 'Create to-do',
+      onPressed: () => onPressed(context),
+      tooltip: tooltip,
       backgroundColor: Theme.of(context).primaryColor,
       foregroundColor: Colors.white,
       child: const Icon(
