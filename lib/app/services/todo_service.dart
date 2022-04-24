@@ -3,15 +3,20 @@ import 'dart:collection';
 import 'package:flutter/widgets.dart';
 import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/interfaces/irepository.dart';
+import 'package:to_dev/app/repositories/repository.dart';
 
 class TodoService extends ChangeNotifier {
-  final IRepository _repository;
+  final IRepository<Todo> repository = Repository(model: Todo());
 
-  final List<Todo> _items = [];
+  List<Todo> _items = [];
 
-  TodoService(IRepository repository) : _repository = repository;
+  TodoService() {
+    Future.microtask(() async => _items = await repository.getAll());
+  }
 
   UnmodifiableListView<Todo> get items => UnmodifiableListView(_items);
+
+  set items(List<Todo> newItems) => _items = newItems;
 
   int get count => _items.length;
 
