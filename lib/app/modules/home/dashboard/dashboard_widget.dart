@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 class DashboardWidget extends StatelessWidget {
@@ -16,8 +17,13 @@ class DashboardWidget extends StatelessWidget {
             },
           ),
           OutlinedButton(
-            onPressed: () {
-              Provider.of<TodoService>(context, listen: false).removeAll();
+            onPressed: () async {
+              var service = Provider.of<TodoService>(
+                context,
+                listen: false,
+              );
+
+              await service.removeAll();
             },
             child: const Text('Remove All'),
           ),
@@ -28,9 +34,9 @@ class DashboardWidget extends StatelessWidget {
                 listen: false,
               );
 
-              print(service.count);
+              service.add(Todo());
             },
-            child: const Text('Get All'),
+            child: const Text('Add One'),
           ),
         ],
       ),

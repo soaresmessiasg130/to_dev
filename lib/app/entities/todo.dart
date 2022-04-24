@@ -3,13 +3,13 @@ import 'package:to_dev/app/interfaces/ientity.dart';
 
 class Todo extends IEntity {
   String? desc;
-  Status status = Status.waiting;
+  Status? status = Status.waiting;
   DateTime? start = DateTime.now();
   DateTime? end = DateTime.now().add(const Duration(days: 1));
 
   Todo({
     this.desc,
-    this.status = Status.waiting,
+    this.status,
     this.start,
     this.end,
     int? id,

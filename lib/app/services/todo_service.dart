@@ -16,24 +16,28 @@ class TodoService extends ChangeNotifier {
 
   UnmodifiableListView<Todo> get items => UnmodifiableListView(_items);
 
-  set items(List<Todo> newItems) => _items = newItems;
-
   int get count => _items.length;
 
-  void add(Todo item) {
-    _items.add(item);
+  Future<void> add(Todo item) async {
+    await repository.create(item);
+
+    _items = await repository.getAll();
 
     notifyListeners();
   }
 
-  void remove(Todo item) {
-    _items.removeWhere((element) => element.id == item.id);
+  Future<void> remove(Todo item) async {
+    await repository.delete(item.id ?? 0);
+
+    _items = await repository.getAll();
 
     notifyListeners();
   }
 
-  void removeAll() {
-    _items.clear();
+  Future<void> removeAll() async {
+    await repository.deleteAll();
+
+    _items = await repository.getAll();
 
     notifyListeners();
   }
