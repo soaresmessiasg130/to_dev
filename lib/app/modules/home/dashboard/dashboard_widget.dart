@@ -21,6 +21,17 @@ class DashboardWidget extends StatelessWidget {
             },
             child: const Text('Remove All'),
           ),
+          OutlinedButton(
+            onPressed: () async {
+              var service = Provider.of<TodoService>(
+                context,
+                listen: false,
+              );
+
+              print(service.count);
+            },
+            child: const Text('Get All'),
+          ),
         ],
       ),
     );

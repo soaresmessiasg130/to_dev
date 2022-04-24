@@ -4,14 +4,11 @@ import 'package:to_dev/app/interfaces/ientity.dart';
 import 'package:to_dev/app/interfaces/irepository.dart';
 
 class Repository<T extends IEntity> implements IRepository<T> {
-  final MainDatabase mainDatabase;
+  final MainDatabase mainDatabase = MainDatabase.instance;
 
   final T model;
 
-  Repository({
-    required this.mainDatabase,
-    required this.model,
-  });
+  Repository({required this.model});
 
   @override
   Future<void> create(T obj) async {

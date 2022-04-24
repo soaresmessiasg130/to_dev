@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:to_dev/app/databases/main_database.dart';
 import 'package:to_dev/app/entities/user.dart';
 import 'package:to_dev/app/repositories/repository.dart';
 
@@ -21,10 +20,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   Future<void> getUserData() async {
-    var repo = Repository<User>(
-      mainDatabase: MainDatabase.instance,
-      model: User(),
-    );
+    var repo = Repository<User>(model: User());
 
     var userFromDb = await repo.getOne(1);
 

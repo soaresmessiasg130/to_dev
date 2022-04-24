@@ -21,73 +21,39 @@ class MainDatabase {
       path,
       version: 1,
       onCreate: _onCreateDatabase,
-      onUpgrade: _onUpdateDatabase,
     );
   }
 
   Future<void> _onCreateDatabase(Database db, int version) async {
-    String ddl = '''''';
+    List<String> ddls = [
+      '''
+        CREATE TABLE users (
+          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+          email TEXT, 
+          name TEXT,
+          created INTEGER,
+          updated INTEGER
+        );
+      ''',
+      '''
+        CREATE TABLE todos (
+          id INTEGER PRIMARY KEY AUTOINCREMENT, 
+          desc TEXT,
+          status TEXT,
+          start INTEGER,
+          end INTEGER,
+          created INTEGER,
+          updated INTEGER
+        );
+      '''
+    ];
 
-    switch (version) {
-      case 1:
-        ddl = '''
-          CREATE TABLE users (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            email TEXT, 
-            name TEXT,
-            created INTEGER,
-            updated INTEGER
-          );
-          CREATE TABLE todos (
-            id INTEGER PRIMARY KEY AUTOINCREMENT, 
-            desc TEXT,
-            status TEXT,
-            start INTEGER,
-            end INTEGER,
-            created INTEGER,
-            updated INTEGER
-          );
-        ''';
-        break;
-    }
-
-    if (ddl.isNotEmpty) {
-      await db.execute(ddl);
-    }
-  }
-
-  FutureOr<void> _onUpdateDatabase(
-      Database db, int oldVersion, int newVersion) async {
-    if (newVersion > oldVersion) {
-      // make update
-      String ddl = '''''';
-
-      switch (newVersion) {
-        case 1:
-          ddl = '''
-            CREATE TABLE users (
-              id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              email TEXT, 
-              name TEXT,
-              created INTEGER,
-              updated INTEGER
-            );
-            CREATE TABLE todos (
-              id INTEGER PRIMARY KEY AUTOINCREMENT, 
-              desc TEXT,
-              status TEXT,
-              start INTEGER,
-              end INTEGER,
-              created INTEGER,
-              updated INTEGER
-            );
-          ''';
-          break;
+    try {
+      for (var ddl in ddls) {
+        await db.execute(ddl);
       }
-
-      await db.execute(ddl);
-    } else if (newVersion < oldVersion) {
-      // make downgrade
+    } catch (e) {
+      print(e);
     }
   }
 }
