@@ -2,9 +2,14 @@ import 'dart:collection';
 
 import 'package:flutter/widgets.dart';
 import 'package:to_dev/app/entities/todo.dart';
+import 'package:to_dev/app/interfaces/irepository.dart';
 
 class TodoService extends ChangeNotifier {
+  final IRepository _repository;
+
   final List<Todo> _items = [];
+
+  TodoService(IRepository repository) : _repository = repository;
 
   UnmodifiableListView<Todo> get items => UnmodifiableListView(_items);
 

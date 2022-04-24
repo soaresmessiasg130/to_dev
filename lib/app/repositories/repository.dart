@@ -1,24 +1,24 @@
 import 'package:sqflite/sqflite.dart';
+import 'package:to_dev/app/databases/main_database.dart';
 import 'package:to_dev/app/interfaces/ientity.dart';
 import 'package:to_dev/app/interfaces/irepository.dart';
 
 class Repository<T extends IEntity> implements IRepository<T> {
-  final Database db;
-
-  final String tableName;
+  final MainDatabase mainDatabase;
 
   final T model;
 
   Repository({
-    required this.db,
-    required this.tableName,
+    required this.mainDatabase,
     required this.model,
   });
 
   @override
   Future<void> create(T obj) async {
+    final db = await mainDatabase.database;
+
     await db.insert(
-      tableName,
+      model.getTableName(),
       obj.toMap(),
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -26,9 +26,11 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<T?> getOne(int id) async {
+    final db = await mainDatabase.database;
+
     try {
       var res = await db.query(
-        tableName,
+        model.getTableName(),
         where: 'id = ?',
         whereArgs: [id],
       );
@@ -45,7 +47,9 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<List<T>> getAll() async {
-    final maps = await db.query(tableName);
+    final db = await mainDatabase.database;
+
+    final maps = await db.query(model.getTableName());
 
     return List.generate(
         maps.length, (index) => model.fromMap(maps[index]) as T);
@@ -53,8 +57,10 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<void> update(T obj) async {
+    final db = await mainDatabase.database;
+
     await db.update(
-      tableName,
+      model.getTableName(),
       obj.toMap(),
       where: 'id = ?',
       whereArgs: [obj.id],
@@ -63,8 +69,10 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<void> delete(int id) async {
+    final db = await mainDatabase.database;
+
     await db.delete(
-      tableName,
+      model.getTableName(),
       where: 'id = ?',
       whereArgs: [id],
     );
@@ -72,6 +80,8 @@ class Repository<T extends IEntity> implements IRepository<T> {
 
   @override
   Future<void> deleteAll() async {
-    await db.delete(tableName);
+    final db = await mainDatabase.database;
+
+    await db.delete(model.getTableName());
   }
 }

@@ -21,11 +21,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
   }
 
   Future<void> getUserData() async {
-    var db = await MainDatabase.instance.database;
-
     var repo = Repository<User>(
-      db: db,
-      tableName: 'users',
+      mainDatabase: MainDatabase.instance,
       model: User(),
     );
 

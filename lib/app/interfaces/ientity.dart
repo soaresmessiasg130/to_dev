@@ -15,6 +15,8 @@ abstract class IEntity {
 
   IEntity fromMap(Map<String, dynamic> map);
 
+  String getTableName() => 'entitys';
+
   @override
   String toString() => 'Entity()';
 }

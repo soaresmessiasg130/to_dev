@@ -1,10 +1,17 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:to_dev/app/databases/main_database.dart';
 import 'package:to_dev/app/entities/todo.dart';
+import 'package:to_dev/app/repositories/repository.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 void todoServiceTest() {
   test('Testing TodoService method: add()', () async {
-    final service = TodoService();
+    final service = TodoService(
+      Repository(
+        mainDatabase: MainDatabase.instance,
+        model: Todo(),
+      ),
+    );
 
     final initialCount = service.count;
 
@@ -18,7 +25,12 @@ void todoServiceTest() {
   });
 
   test('Testing TodoService method: remove()', () async {
-    final service = TodoService();
+    final service = TodoService(
+      Repository(
+        mainDatabase: MainDatabase.instance,
+        model: Todo(),
+      ),
+    );
 
     final newTodo = Todo(id: 1);
 
@@ -34,7 +46,12 @@ void todoServiceTest() {
   });
 
   test('Testing TodoService method: removeAll()', () async {
-    final service = TodoService();
+    final service = TodoService(
+      Repository(
+        mainDatabase: MainDatabase.instance,
+        model: Todo(),
+      ),
+    );
 
     for (int i = 1; i < 3; i++) {
       service.add(Todo(id: i));

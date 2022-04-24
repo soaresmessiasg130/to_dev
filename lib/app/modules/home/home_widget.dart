@@ -3,7 +3,9 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/components/bottom_bar.dart';
 import 'package:to_dev/app/components/floating_button.dart';
+import 'package:to_dev/app/databases/main_database.dart';
 import 'package:to_dev/app/entities/todo.dart';
+import 'package:to_dev/app/repositories/repository.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -24,7 +26,14 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => TodoService()),
+        ChangeNotifierProvider(
+          create: (context) => TodoService(
+            Repository(
+              mainDatabase: MainDatabase.instance,
+              model: Todo(),
+            ),
+          ),
+        ),
       ],
       child: Scaffold(
         appBar: AppBar(

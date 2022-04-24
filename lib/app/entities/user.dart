@@ -44,5 +44,8 @@ class User extends IEntity {
   }
 
   @override
+  String getTableName() => 'users';
+
+  @override
   String toString() => 'User()';
 }
