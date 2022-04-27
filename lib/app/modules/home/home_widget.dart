@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/components/bottom_bar.dart';
+import 'package:to_dev/app/components/dialog_default.dart';
 import 'package:to_dev/app/components/floating_button.dart';
-import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -14,9 +14,36 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  void onPressedFloatingButton(BuildContext context) {
-    Provider.of<TodoService>(context, listen: false).add(
-      Todo(id: 1),
+  Future<void> onPressedFloatingButton(BuildContext context) async {
+    DialogDefault().activateDialog(
+      context,
+      [
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+        const Text('Hello, world'),
+      ],
     );
   }
 
