@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:to_dev/app/components/datetime_input.dart';
 
 class CreateTodoForm extends StatefulWidget {
   const CreateTodoForm({Key? key}) : super(key: key);
@@ -53,6 +54,10 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                   border: OutlineInputBorder(),
                 ),
               ),
+              const SizedBox(
+                height: 8,
+              ),
+              const DateTimeInput(restorationId: 'main'),
               const SizedBox(
                 height: 8,
               ),
