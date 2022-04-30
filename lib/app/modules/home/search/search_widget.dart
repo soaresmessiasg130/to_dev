@@ -5,12 +5,8 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: const [
-        Center(
-          child: Text('Search'),
-        ),
-      ],
+    return const Center(
+      child: Text('Search'),
     );
   }
 }

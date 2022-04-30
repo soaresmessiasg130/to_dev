@@ -12,13 +12,16 @@ class FloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () => onPressed(context),
-      tooltip: tooltip,
-      backgroundColor: Theme.of(context).primaryColor,
-      foregroundColor: Colors.white,
-      child: const Icon(
-        Icons.add,
+    return Visibility(
+      visible: MediaQuery.of(context).viewInsets.bottom == 0,
+      child: FloatingActionButton(
+        onPressed: () => onPressed(context),
+        tooltip: tooltip,
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.white,
+        child: const Icon(
+          Icons.add,
+        ),
       ),
     );
   }

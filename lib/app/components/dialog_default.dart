@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 class DialogDefault {
-  Future<void> activateDialog(
-      BuildContext context, List<Widget> children) async {
+  Future<void> activateDialog(BuildContext context, Widget children) async {
     showDialog(
       barrierDismissible: true,
       context: context,
@@ -16,7 +15,9 @@ class DialogDefault {
             child: ListView(
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(horizontal: 32),
-              children: children,
+              children: [
+                children,
+              ],
             ),
           ),
         );
