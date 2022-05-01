@@ -14,6 +14,17 @@ class DateTimeInput extends StatefulWidget {
 class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
   final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
 
+  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
+      RestorableRouteFuture<DateTime?>(
+    onComplete: _onSelectDate,
+    onPresent: (NavigatorState navigator, Object? arguments) {
+      return navigator.restorablePush(
+        _datePickerRoute,
+        arguments: _selectedDate.value.millisecondsSinceEpoch,
+      );
+    },
+  );
+
   @override
   String? get restorationId => widget.restorationId;
 
@@ -26,17 +37,6 @@ class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
       'date_picker_route_future',
     );
   }
-
-  late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
-      RestorableRouteFuture<DateTime?>(
-    onComplete: _selectDate,
-    onPresent: (NavigatorState navigator, Object? arguments) {
-      return navigator.restorablePush(
-        _datePickerRoute,
-        arguments: _selectedDate.value.millisecondsSinceEpoch,
-      );
-    },
-  );
 
   static Route<DateTime?> _datePickerRoute(
     BuildContext context,
@@ -56,7 +56,7 @@ class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
     );
   }
 
-  void _selectDate(DateTime? value) {
+  void _onSelectDate(DateTime? value) {
     if (value != null) {
       setState(() {
         final newSelectedDateValue =
@@ -67,15 +67,16 @@ class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
     }
   }
 
+  void _onOpenPicker() {
+    _restorableDatePickerRouteFuture.present();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      onTap: () async {
-        _restorableDatePickerRouteFuture.present();
-      },
-      decoration: InputDecoration(
-        border: const OutlineInputBorder(),
-        hintText: DateFormat.yMMMd().format(_selectedDate.value),
+    return TextButton(
+      onPressed: _onOpenPicker,
+      child: Text(
+        DateFormat.yMMMd().format(_selectedDate.value),
       ),
     );
   }
