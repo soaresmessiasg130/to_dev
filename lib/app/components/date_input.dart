@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class DateTimeInput extends StatefulWidget {
+class DateInput extends StatefulWidget {
   final String restorationId;
 
-  const DateTimeInput({Key? key, required this.restorationId})
-      : super(key: key);
+  const DateInput({Key? key, required this.restorationId}) : super(key: key);
 
   @override
-  State<DateTimeInput> createState() => _DateTimeInputState();
+  State<DateInput> createState() => _DateInputState();
 }
 
-class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
+class _DateInputState extends State<DateInput> with RestorationMixin {
   final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
 
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =

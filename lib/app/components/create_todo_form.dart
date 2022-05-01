@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:to_dev/app/components/datetime_input.dart';
+import 'package:to_dev/app/components/date_input.dart';
+import 'package:to_dev/app/components/time_input.dart';
 
 class CreateTodoForm extends StatefulWidget {
   const CreateTodoForm({Key? key}) : super(key: key);
@@ -57,7 +58,8 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
               const SizedBox(
                 height: 8,
               ),
-              const DateTimeInput(restorationId: 'main'),
+              const DateInput(restorationId: 'date_input'),
+              const TimeInput(restorationId: 'time_input'),
               const SizedBox(
                 height: 8,
               ),
@@ -73,6 +75,8 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                   OutlinedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        Navigator.of(context).pop();
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Done'),
