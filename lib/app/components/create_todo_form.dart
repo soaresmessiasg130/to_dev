@@ -41,7 +41,14 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Description:'),
+              const Text(
+                'Create Todo',
+                style: TextStyle(
+                  fontSize: 22,
+                ),
+              ),
+              const SizedBox(height: 8),
+              const Text('Description'),
               const SizedBox(height: 8),
               TextFormField(
                 controller: descController,
@@ -66,7 +73,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Start:'),
+                      const Text('Start'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
@@ -74,7 +81,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                           TimeInput(restorationId: 'time_input'),
                         ],
                       ),
-                      const Text('End:'),
+                      const Text('End'),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: const [
@@ -88,7 +95,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('Status:'),
+                      Text('Status'),
                     ],
                   ),
                 ],

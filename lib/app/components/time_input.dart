@@ -41,8 +41,6 @@ class _TimeInputState extends State<TimeInput> with RestorationMixin {
     BuildContext context,
     Object? arguments,
   ) {
-    print(arguments);
-
     return DialogRoute(
       context: context,
       builder: (BuildContext context) {
