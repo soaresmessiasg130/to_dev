@@ -39,7 +39,10 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
         Form(
           key: _formKey,
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text('Description:'),
+              const SizedBox(height: 8),
               TextFormField(
                 controller: descController,
                 focusNode: descFocusNode,
@@ -55,13 +58,40 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                   border: OutlineInputBorder(),
                 ),
               ),
-              const SizedBox(
-                height: 8,
-              ),
-              const DateInput(restorationId: 'date_input'),
-              const TimeInput(restorationId: 'time_input'),
-              const SizedBox(
-                height: 8,
+              const SizedBox(height: 8),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('Start:'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          DateInput(restorationId: 'date_input'),
+                          TimeInput(restorationId: 'time_input'),
+                        ],
+                      ),
+                      const Text('End:'),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: const [
+                          DateInput(restorationId: 'date_input'),
+                          TimeInput(restorationId: 'time_input'),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text('Status:'),
+                    ],
+                  ),
+                ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
