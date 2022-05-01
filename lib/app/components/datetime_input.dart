@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DateTimeInput extends StatefulWidget {
   final String restorationId;
@@ -11,8 +12,20 @@ class DateTimeInput extends StatefulWidget {
 }
 
 class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
-  final RestorableDateTime _selectedDate =
-      RestorableDateTime(DateTime.now().toUtc());
+  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
+
+  @override
+  String? get restorationId => widget.restorationId;
+
+  @override
+  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
+    registerForRestoration(_selectedDate, 'selected_date');
+
+    registerForRestoration(
+      _restorableDatePickerRouteFuture,
+      'date_picker_route_future',
+    );
+  }
 
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
       RestorableRouteFuture<DateTime?>(
@@ -24,46 +37,6 @@ class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
       );
     },
   );
-
-  @override
-  String? get restorationId => widget.restorationId;
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_selectedDate, 'selected_date');
-    registerForRestoration(
-      _restorableDatePickerRouteFuture,
-      'date_picker_route_future',
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: OutlinedButton(
-        onPressed: () {
-          _restorableDatePickerRouteFuture.present();
-        },
-        child: const Text('Click to select date'),
-      ),
-    );
-  }
-
-  void _selectDate(DateTime? value) {
-    if (value != null) {
-      setState(() {
-        _selectedDate.value = value;
-
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(
-              'Selected: ${_selectedDate.value.year}',
-            ),
-          ),
-        );
-      });
-    }
-  }
 
   static Route<DateTime?> _datePickerRoute(
     BuildContext context,
@@ -80,6 +53,30 @@ class _DateTimeInputState extends State<DateTimeInput> with RestorationMixin {
           lastDate: DateTime(2023),
         );
       },
+    );
+  }
+
+  void _selectDate(DateTime? value) {
+    if (value != null) {
+      setState(() {
+        final newSelectedDateValue =
+            DateTime(value.year, value.month, value.day);
+
+        _selectedDate.value = newSelectedDateValue;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      onTap: () async {
+        _restorableDatePickerRouteFuture.present();
+      },
+      decoration: InputDecoration(
+        border: const OutlineInputBorder(),
+        hintText: DateFormat.yMMMd().format(_selectedDate.value),
+      ),
     );
   }
 }
