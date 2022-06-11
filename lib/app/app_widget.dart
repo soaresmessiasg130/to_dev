@@ -11,26 +11,8 @@ class AppWidget extends StatelessWidget {
     return MaterialApp.router(
       title: 'To Dev',
       theme: ThemeData(
-        primaryColor: Colors.grey[900],
-        backgroundColor: Colors.black,
-        scaffoldBackgroundColor: Colors.black,
-        dialogBackgroundColor: Colors.grey[900],
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.black,
-        ),
-        colorScheme: const ColorScheme(
-          brightness: Brightness.dark,
-          primary: Colors.white,
-          onPrimary: Colors.black,
-          secondary: Colors.blueGrey,
-          onSecondary: Colors.black,
-          error: Colors.red,
-          onError: Colors.white,
-          background: Colors.white,
-          onBackground: Colors.black,
-          surface: Colors.blueGrey,
-          onSurface: Colors.white,
-        ),
+        primaryColor: Colors.teal,
+        primarySwatch: Colors.teal,
       ),
       debugShowCheckedModeBanner: false,
       routeInformationParser: Modular.routeInformationParser,
