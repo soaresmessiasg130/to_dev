@@ -3,12 +3,6 @@ import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 void todoServiceTest() {
-  test('Testing TodoService method: getAll()', () async {
-    final service = TodoService();
-
-    print(service.count);
-  });
-
   test('Testing TodoService method: add()', () async {
     final service = TodoService();
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/components/bottom_bar.dart';
-import 'package:to_dev/app/components/create_todo_form.dart';
 import 'package:to_dev/app/components/dialog_default.dart';
 import 'package:to_dev/app/components/floating_button.dart';
+import 'package:to_dev/app/modules/home/components/create_something_modal.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
 class HomeWidget extends StatefulWidget {
@@ -18,7 +18,7 @@ class _HomeWidgetState extends State<HomeWidget> {
   Future<void> onPressedFloatingButton(BuildContext context) async {
     DialogDefault().activateDialog(
       context,
-      const CreateTodoForm(),
+      const CreateSomethingModal(),
     );
   }
 
@@ -42,7 +42,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           ],
         ),
         floatingActionButton: FloatingButton(
-          tooltip: 'Create an to-do',
+          tooltip: 'Create',
           onPressed: onPressedFloatingButton,
         ),
         bottomNavigationBar: BottomBar(),

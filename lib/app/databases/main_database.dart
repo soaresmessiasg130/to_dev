@@ -53,7 +53,7 @@ class MainDatabase {
         await db.execute(ddl);
       }
     } catch (e) {
-      print(e);
+      return;
     }
   }
 }
