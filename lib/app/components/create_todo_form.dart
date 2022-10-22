@@ -34,101 +34,72 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Form(
-          key: _formKey,
-          child: Column(
+    return Form(
+      key: _formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Todo\'s description'),
+          const SizedBox(height: 8),
+          TextFormField(
+            controller: descController,
+            focusNode: descFocusNode,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Description is required';
+              }
+
+              return null;
+            },
+            decoration: const InputDecoration(
+              hintText: 'Todo\'s description',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Create Todo',
-                style: TextStyle(
-                  fontSize: 22,
-                ),
-              ),
-              const SizedBox(height: 8),
-              const Text('Description'),
-              const SizedBox(height: 8),
-              TextFormField(
-                controller: descController,
-                focusNode: descFocusNode,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'This input is empty...';
-                  }
-
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  hintText: 'Todo\'s description',
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 8),
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
+                  const Text('Finish in'),
+                  const SizedBox(height: 8),
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text('Start'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          DateInput(restorationId: 'date_input'),
-                          TimeInput(restorationId: 'time_input'),
-                        ],
-                      ),
-                      const Text('End'),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: const [
-                          DateInput(restorationId: 'date_input'),
-                          TimeInput(restorationId: 'time_input'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
-                      Text('Status'),
+                      DateInput(restorationId: 'date_input'),
+                      TimeInput(restorationId: 'time_input'),
                     ],
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: const Text('Cancel'),
-                  ),
-                  OutlinedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        Navigator.of(context).pop();
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Done'),
-                          ),
-                        );
-                      }
-                    },
-                    child: const Text('Save'),
                   ),
                 ],
               ),
             ],
           ),
-        ),
-      ],
+          const SizedBox(height: 8),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              TextButton(onPressed: () {}, child: const Text('Go back')),
+              ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.of(context).pop();
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Done'),
+                      ),
+                    );
+                  }
+                },
+                child: const Text('Save'),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
