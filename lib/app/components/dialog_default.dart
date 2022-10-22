@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DialogDefault {
-  Future<void> activateDialog(BuildContext context, Widget children) async {
+  Future<void> activateDialog(BuildContext context, Widget children,
+      {String? title, String? cancelLabel}) async {
     showDialog(
       barrierDismissible: true,
       context: context,
@@ -16,6 +17,17 @@ class DialogDefault {
               shrinkWrap: true,
               padding: const EdgeInsets.symmetric(horizontal: 32),
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(title ?? ''),
+                    TextButton(
+                      onPressed: () => hideDialog(context),
+                      child: Text(cancelLabel ?? 'Cancel'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
                 children,
               ],
             ),
@@ -23,5 +35,9 @@ class DialogDefault {
         );
       },
     );
+  }
+
+  Future<void> hideDialog(BuildContext context) async {
+    Navigator.of(context).pop();
   }
 }

@@ -16,10 +16,8 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   Future<void> onPressedFloatingButton(BuildContext context) async {
-    DialogDefault().activateDialog(
-      context,
-      const CreateSomethingModal(),
-    );
+    await DialogDefault().activateDialog(context, const CreateSomethingModal(),
+        title: 'Create something');
   }
 
   @override

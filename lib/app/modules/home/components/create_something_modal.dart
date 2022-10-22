@@ -11,55 +11,22 @@ class _CreateSomethingModalState extends State<CreateSomethingModal> {
   @override
   Widget build(BuildContext context) {
     return (Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Create something'),
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             TextButton(
               onPressed: () {},
-              child: const Text(
-                'Create To-do',
-              ),
+              child: const Text('To-do'),
             ),
-            const Text('Anything that you need done'),
-          ],
-        ),
-        Row(
-          children: [
             TextButton(
               onPressed: () {},
-              child: const Text(
-                'Create Reminder',
-              ),
+              child: const Text('Reminder'),
             ),
-            const Text('An notification will appears to you'),
-          ],
-        ),
-        Row(
-          children: [
             TextButton(
               onPressed: () {},
-              child: const Text(
-                'Create Project',
-              ),
-            ),
-            const Text('Where you can manage projects easily'),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Cancel',
-              ),
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                'Continue',
-              ),
+              child: const Text('Project'),
             ),
           ],
         ),
