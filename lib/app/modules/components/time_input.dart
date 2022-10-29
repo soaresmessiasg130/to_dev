@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class TimeInput extends StatefulWidget {
   final String restorationId;
@@ -44,14 +45,13 @@ class _TimeInputState extends State<TimeInput> with RestorationMixin {
     return DialogRoute(
       context: context,
       builder: (BuildContext context) {
+        final format = DateFormat.jm();
+
         return TimePickerDialog(
           restorationId: 'time_picker_dialog',
-          initialTime: TimeOfDay(
-            hour: int.parse(
-              arguments != null ? arguments.toString().split(':')[0] : '0',
-            ),
-            minute: int.parse(
-              arguments != null ? arguments.toString().split(':')[1] : '0',
+          initialTime: TimeOfDay.fromDateTime(
+            format.parse(
+              arguments.toString(),
             ),
           ),
         );

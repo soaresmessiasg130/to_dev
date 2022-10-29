@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:to_dev/app/components/date_input.dart';
-import 'package:to_dev/app/components/time_input.dart';
+import 'package:to_dev/app/modules/components/date_input.dart';
+import 'package:to_dev/app/modules/components/time_input.dart';
 
 class CreateTodoForm extends StatefulWidget {
-  const CreateTodoForm({Key? key}) : super(key: key);
+  const CreateTodoForm({Key? key, required this.onGoBack}) : super(key: key);
+
+  final VoidCallback onGoBack;
 
   @override
   State<CreateTodoForm> createState() => _CreateTodoFormState();
@@ -81,7 +83,10 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(onPressed: () {}, child: const Text('Go back')),
+              TextButton(
+                onPressed: widget.onGoBack,
+                child: const Text('Go back'),
+              ),
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
