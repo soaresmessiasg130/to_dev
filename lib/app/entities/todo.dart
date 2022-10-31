@@ -66,7 +66,4 @@ class Todo extends IEntity {
 
   @override
   String getTableName() => 'todos';
-
-  @override
-  String toString() => 'Todo()';
 }

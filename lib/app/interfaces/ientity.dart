@@ -9,14 +9,11 @@ abstract class IEntity {
     this.updated,
   });
 
-  List<String> getFields() => [];
+  List<String> getFields();
 
-  Map<String, dynamic> toMap() => {};
+  Map<String, dynamic> toMap();
 
   IEntity fromMap(Map<String, dynamic> map);
 
-  String getTableName() => 'entitys';
-
-  @override
-  String toString() => 'Entity()';
+  String getTableName();
 }

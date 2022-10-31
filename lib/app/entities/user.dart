@@ -17,7 +17,13 @@ class User extends IEntity {
         );
 
   @override
-  List<String> getFields() => ['id', 'name', 'email'];
+  List<String> getFields() => [
+        'id',
+        'name',
+        'email',
+        'created',
+        'updated',
+      ];
 
   @override
   Map<String, dynamic> toMap() => {
@@ -45,7 +51,4 @@ class User extends IEntity {
 
   @override
   String getTableName() => 'users';
-
-  @override
-  String toString() => 'User()';
 }
