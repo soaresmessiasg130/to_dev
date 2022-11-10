@@ -5,8 +5,20 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
+import 'dart:convert';
+
+import 'package:flutter_test/flutter_test.dart';
+import 'package:to_dev/app/entities/reminder.dart';
+
 import 'services/todo_service.dart';
 
 void main() {
-  todoServiceTest();
+  test('Test', () {
+    final reminder = new Reminder();
+
+    final map = reminder.toMap();
+
+    print(reminder.getFields());
+  });
+  // todoServiceTest();
 }
