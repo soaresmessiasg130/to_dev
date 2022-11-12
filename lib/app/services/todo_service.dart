@@ -6,38 +6,38 @@ import 'package:to_dev/app/interfaces/irepository.dart';
 import 'package:to_dev/app/repositories/repository.dart';
 
 class TodoService extends ChangeNotifier {
-  final IRepository<Todo> repository = Repository(model: Todo());
+  final IRepository<Todo> _repository = Repository(model: Todo());
 
   List<Todo> _items = [];
-
-  TodoService() {
-    Future.microtask(() async => _items = await repository.getAll());
-  }
 
   UnmodifiableListView<Todo> get items => UnmodifiableListView(_items);
 
   int get count => _items.length;
 
-  Future<void> add(Todo item) async {
-    await repository.create(item);
+  TodoService() {
+    Future.microtask(() async => _items = await _repository.getAll());
+  }
 
-    _items = await repository.getAll();
+  Future<void> add(Todo item) async {
+    await _repository.create(item);
+
+    _items = await _repository.getAll();
 
     notifyListeners();
   }
 
   Future<void> remove(Todo item) async {
-    await repository.delete(item.id ?? 0);
+    await _repository.delete(item.id ?? 0);
 
-    _items = await repository.getAll();
+    _items = await _repository.getAll();
 
     notifyListeners();
   }
 
   Future<void> removeAll() async {
-    await repository.deleteAll();
+    await _repository.deleteAll();
 
-    _items = await repository.getAll();
+    _items = await _repository.getAll();
 
     notifyListeners();
   }
