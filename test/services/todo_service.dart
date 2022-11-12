@@ -1,6 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/services/todo_service.dart';
+import 'package:to_dev/app/utils/uuid.dart';
 
 void testTodoService() {
   test('Testing TodoService method: add()', () async {
@@ -12,7 +13,7 @@ void testTodoService() {
       expect(service.count, greaterThan(initialCount));
     });
 
-    final newTodo = Todo(id: 1);
+    final newTodo = Todo(title: 'New Todo', id: getUuid());
 
     service.add(newTodo);
   });
@@ -20,7 +21,7 @@ void testTodoService() {
   test('Testing TodoService method: remove()', () async {
     final service = TodoService();
 
-    final newTodo = Todo(id: 1);
+    final newTodo = Todo(title: 'New Todo', id: getUuid());
 
     service.add(newTodo);
 
@@ -37,7 +38,7 @@ void testTodoService() {
     final service = TodoService();
 
     for (int i = 1; i < 3; i++) {
-      service.add(Todo(id: i));
+      service.add(Todo(title: 'New Todo', id:  getUuid()));
     }
 
     service.addListener(() {

@@ -1,12 +1,8 @@
 abstract class IEntity {
-  int? id;
-  DateTime? created = DateTime.now();
-  DateTime? updated = DateTime.now();
+  String id;
 
   IEntity({
-    this.id,
-    this.created,
-    this.updated,
+    required this.id,
   });
 
   List<String> getFields();

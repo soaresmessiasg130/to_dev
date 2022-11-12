@@ -15,8 +15,7 @@ class HomeModule extends Module {
       '/',
       child: (context, args) => const HomeWidget(),
       children: [
-        ChildRoute('/dashboard',
-            child: (context, args) => const DashboardWidget()),
+        ChildRoute('/dashboard', child: (context, args) => const DashboardWidget()),
         ChildRoute('/todos', child: (context, args) => const TodosWidget()),
         ChildRoute('/search', child: (context, args) => const SearchWidget()),
         ChildRoute('/profile', child: (context, args) => const ProfileWidget()),

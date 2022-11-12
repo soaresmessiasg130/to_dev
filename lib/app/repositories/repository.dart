@@ -22,7 +22,7 @@ class Repository<T extends IEntity> implements IRepository<T> {
   }
 
   @override
-  Future<T?> getOne(int id) async {
+  Future<T?> getOne(String id) async {
     final db = await mainDatabase.database;
 
     try {
@@ -65,7 +65,7 @@ class Repository<T extends IEntity> implements IRepository<T> {
   }
 
   @override
-  Future<void> delete(int id) async {
+  Future<void> delete(String id) async {
     final db = await mainDatabase.database;
 
     await db.delete(

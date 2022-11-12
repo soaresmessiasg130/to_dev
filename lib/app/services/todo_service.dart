@@ -6,7 +6,7 @@ import 'package:to_dev/app/interfaces/irepository.dart';
 import 'package:to_dev/app/repositories/repository.dart';
 
 class TodoService extends ChangeNotifier {
-  final IRepository<Todo> _repository = Repository(model: Todo());
+  final IRepository<Todo> _repository = Repository(model: Todo(id: '', title: ''));
 
   List<Todo> _items = [];
 
@@ -27,7 +27,7 @@ class TodoService extends ChangeNotifier {
   }
 
   Future<void> remove(Todo item) async {
-    await _repository.delete(item.id ?? 0);
+    await _repository.delete(item.id);
 
     _items = await _repository.getAll();
 

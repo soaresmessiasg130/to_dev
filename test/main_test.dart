@@ -1,11 +1,8 @@
+import 'package:flutter/material.dart';
 import 'dart:ui';
 
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_test/flutter_test.dart';
-import 'package:to_dev/app/entities/reminder.dart';
-
-import 'entities/test.dart';
 import 'services/todo_service.dart';
+import 'entities/test.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

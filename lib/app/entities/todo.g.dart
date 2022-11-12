@@ -7,13 +7,14 @@ part of 'todo.dart';
 // **************************************************************************
 
 Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
+      id: json['id'] as String,
+      title: json['title'] as String,
       desc: json['desc'] as String?,
       status: $enumDecodeNullable(_$StatusEnumMap, json['status']),
       start: json['start'] == null
           ? null
           : DateTime.parse(json['start'] as String),
       end: json['end'] == null ? null : DateTime.parse(json['end'] as String),
-      id: json['id'] as int?,
       created: json['created'] == null
           ? null
           : DateTime.parse(json['created'] as String),
@@ -24,12 +25,13 @@ Todo _$TodoFromJson(Map<String, dynamic> json) => Todo(
 
 Map<String, dynamic> _$TodoToJson(Todo instance) => <String, dynamic>{
       'id': instance.id,
-      'created': instance.created?.toIso8601String(),
-      'updated': instance.updated?.toIso8601String(),
+      'title': instance.title,
       'desc': instance.desc,
       'status': _$StatusEnumMap[instance.status],
       'start': instance.start?.toIso8601String(),
       'end': instance.end?.toIso8601String(),
+      'created': instance.created?.toIso8601String(),
+      'updated': instance.updated?.toIso8601String(),
     };
 
 const _$StatusEnumMap = {
