@@ -1,17 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
-
 import '../interfaces/ientity.dart';
 
 part 'reminder.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true)
 class Reminder extends IEntity {
   String? label;
   DateTime? date;
-  bool stopped = false;
+
+  Reminder();
 
   @override
-  IEntity fromMap(Map<String, dynamic> map) => _$ReminderFromJson(map);
+  Reminder fromMap(Map<String, dynamic> map) => _$ReminderFromJson(map);
 
   @override
   Map<String, dynamic> toMap() => _$ReminderToJson(this);

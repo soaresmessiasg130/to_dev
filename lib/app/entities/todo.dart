@@ -1,6 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:to_dev/app/enums/status.dart';
 import 'package:to_dev/app/interfaces/ientity.dart';
 
+part 'todo.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Todo extends IEntity {
   String? desc;
   Status? status = Status.waiting;
@@ -22,47 +26,13 @@ class Todo extends IEntity {
         );
 
   @override
-  List<String> getFields() => [
-        'id',
-        'desc',
-        'status',
-        'start',
-        'end',
-        'created',
-        'updated',
-      ];
+  IEntity fromMap(Map<String, dynamic> map) => _$TodoFromJson(map);
 
   @override
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'desc': desc,
-        'status': status,
-        'start': start?.millisecondsSinceEpoch.abs(),
-        'end': end?.millisecondsSinceEpoch.abs(),
-        'created': created?.millisecondsSinceEpoch.abs(),
-        'updated': updated?.millisecondsSinceEpoch.abs(),
-      };
+  Map<String, dynamic> toMap() => _$TodoToJson(this);
 
   @override
-  IEntity fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    desc = map['desc'];
-    status = map['status'];
-    start = map['start'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['start'])
-        : DateTime.now();
-    end = map['end'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['end'])
-        : DateTime.now();
-    created = map['created'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
-        : DateTime.now();
-    updated = map['updated'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
-        : DateTime.now();
-
-    return this;
-  }
+  List<String> getFields() => toMap().keys.toList();
 
   @override
   String getTableName() => 'todos';

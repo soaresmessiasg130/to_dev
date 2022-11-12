@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:to_dev/app/interfaces/ientity.dart';
 
+part 'user.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class User extends IEntity {
   String? name;
   String? email;
@@ -17,37 +21,13 @@ class User extends IEntity {
         );
 
   @override
-  List<String> getFields() => [
-        'id',
-        'name',
-        'email',
-        'created',
-        'updated',
-      ];
+  IEntity fromMap(Map<String, dynamic> map) => _$UserFromJson(map);
 
   @override
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'name': name,
-        'email': email,
-        'created': created?.millisecondsSinceEpoch.abs(),
-        'updated': updated?.millisecondsSinceEpoch.abs(),
-      };
+  Map<String, dynamic> toMap() => _$UserToJson(this);
 
   @override
-  IEntity fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    name = map['name'];
-    email = map['email'];
-    created = map['created'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
-        : DateTime.now();
-    updated = map['updated'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
-        : DateTime.now();
-
-    return this;
-  }
+  List<String> getFields() => toMap().keys.toList();
 
   @override
   String getTableName() => 'users';

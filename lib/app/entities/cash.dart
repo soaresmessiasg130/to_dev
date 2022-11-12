@@ -1,5 +1,9 @@
+import 'package:json_annotation/json_annotation.dart';
 import '../interfaces/ientity.dart';
 
+part 'cash.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Cash extends IEntity {
   DateTime? month;
   double? total;
@@ -13,38 +17,14 @@ class Cash extends IEntity {
   }) : super(id: id, created: created);
 
   @override
-  IEntity fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    month = map['month'];
-    total = map['total'];
-    created = map['created'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
-        : DateTime.now();
-    updated = map['updated'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
-        : DateTime.now();
-
-    return this;
-  }
+  IEntity fromMap(Map<String, dynamic> map) => _$CashFromJson(map);
 
   @override
-  List<String> getFields() => [
-        'id',
-        'month',
-        'total',
-        'created',
-        'updated',
-      ];
+  Map<String, dynamic> toMap() => _$CashToJson(this);
+
+  @override
+  List<String> getFields() => toMap().keys.toList();
 
   @override
   String getTableName() => 'cashs';
-
-  @override
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'month': month,
-        'total': total,
-        'created': created?.millisecondsSinceEpoch.abs(),
-        'updated': updated?.millisecondsSinceEpoch.abs(),
-      };
 }

@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:to_dev/app/entities/todo.dart';
 import 'package:to_dev/app/services/todo_service.dart';
 
-void todoServiceTest() {
+void testTodoService() {
   test('Testing TodoService method: add()', () async {
     final service = TodoService();
 

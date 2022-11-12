@@ -13,8 +13,7 @@ Reminder _$ReminderFromJson(Map<String, dynamic> json) => Reminder()
   ..updated =
       json['updated'] == null ? null : DateTime.parse(json['updated'] as String)
   ..label = json['label'] as String?
-  ..date = json['date'] == null ? null : DateTime.parse(json['date'] as String)
-  ..stopped = json['stopped'] as bool;
+  ..date = json['date'] == null ? null : DateTime.parse(json['date'] as String);
 
 Map<String, dynamic> _$ReminderToJson(Reminder instance) => <String, dynamic>{
       'id': instance.id,
@@ -22,5 +21,4 @@ Map<String, dynamic> _$ReminderToJson(Reminder instance) => <String, dynamic>{
       'updated': instance.updated?.toIso8601String(),
       'label': instance.label,
       'date': instance.date?.toIso8601String(),
-      'stopped': instance.stopped,
     };

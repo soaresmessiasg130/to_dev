@@ -1,5 +1,10 @@
+import 'package:json_annotation/json_annotation.dart';
+
 import '../interfaces/ientity.dart';
 
+part 'project.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class Project extends IEntity {
   String title;
   String? desc;
@@ -21,44 +26,14 @@ class Project extends IEntity {
         );
 
   @override
-  IEntity fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    title = map['title'];
-    desc = map['desc'];
-    start = map['start'];
-    end = map['end'];
-    created = map['created'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['created'])
-        : DateTime.now();
-    updated = map['updated'] == Null
-        ? DateTime.fromMillisecondsSinceEpoch(map['updated'])
-        : DateTime.now();
-
-    return this;
-  }
+  IEntity fromMap(Map<String, dynamic> map) => _$ProjectFromJson(map);
 
   @override
-  List<String> getFields() => [
-        'id',
-        'title',
-        'desc',
-        'start',
-        'end',
-        'created',
-        'updated',
-      ];
+  Map<String, dynamic> toMap() => _$ProjectToJson(this);
+
+  @override
+  List<String> getFields() => toMap().keys.toList();
 
   @override
   String getTableName() => 'projects';
-
-  @override
-  Map<String, dynamic> toMap() => {
-        'id': id,
-        'title': title,
-        'desc': desc,
-        'start': start?.millisecondsSinceEpoch.abs(),
-        'end': end?.millisecondsSinceEpoch.abs(),
-        'created': created?.millisecondsSinceEpoch.abs(),
-        'updated': updated?.millisecondsSinceEpoch.abs(),
-      };
 }
