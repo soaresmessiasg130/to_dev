@@ -22,7 +22,7 @@ class MainDatabase {
 
     final database = await openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreateDatabase,
       onUpgrade: _onUpgradeDatabase,
     );
