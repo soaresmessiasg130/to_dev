@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:to_dev/app/modules/components/date_input.dart';
 import 'package:to_dev/app/modules/components/time_input.dart';
+import 'package:to_dev/app/utils/uuid.dart';
+
+import '../../entities/todo.dart';
+import '../../services/todo_service.dart';
 
 class CreateTodoForm extends StatefulWidget {
-  const CreateTodoForm({Key? key, required this.onGoBack}) : super(key: key);
+  final BuildContext context;
+
+  const CreateTodoForm({Key? key, required this.onGoBack, required this.context}) : super(key: key);
 
   final VoidCallback onGoBack;
 
@@ -32,6 +39,22 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
     descController.dispose();
 
     super.dispose();
+  }
+
+  Future<void> onSave() async {
+    if (_formKey.currentState!.validate()) {
+      final newTodo = Todo(id: getUuid(), title: 'New Todo', desc: 'Desc');
+
+      await Provider.of<TodoService>(widget.context, listen: false).add(newTodo);
+    }
+
+    Navigator.of(context).pop();
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Done'),
+      ),
+    );
   }
 
   @override
@@ -88,19 +111,9 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                 child: const Text('Go back'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    Navigator.of(context).pop();
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Done'),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Save'),
-              ),
+                  onPressed: onSave,
+                  child: const Text('Save'),
+                )
             ],
           ),
         ],

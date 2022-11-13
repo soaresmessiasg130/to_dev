@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:to_dev/app/databases/main_database_ddl.dart';
 
 class MainDatabase {
   MainDatabase._privateConstructor();
@@ -19,32 +20,21 @@ class MainDatabase {
 
     final path = join(databasesPath, mainDatabaseName);
 
-    return await openDatabase(
+    final database = await openDatabase(
       path,
       version: 2,
       onCreate: _onCreateDatabase,
       onUpgrade: _onUpgradeDatabase,
     );
+
+    _database = database;
+
+    return database;
   }
 
   Future<void> _onCreateDatabase(Database db, int version) async {
-    List<String> ddls = [
-      '''
-        CREATE TABLE todos (
-          id INTEGER PRIMARY KEY AUTOINCREMENT, 
-          title TEXT NOT NULL,
-          desc TEXT,
-          status TEXT,
-          start INTEGER,
-          end INTEGER,
-          created INTEGER,
-          updated INTEGER
-        );
-      '''
-    ];
-
     try {
-      for (var ddl in ddls) {
+      for (var ddl in mainDatabaseDdlCreate) {
         await db.execute(ddl);
       }
     } catch (e) {
@@ -52,26 +42,10 @@ class MainDatabase {
     }
   }
 
-  FutureOr<void> _onUpgradeDatabase(Database db, int oldVersion, int newVersion) async {
-    List<String> ddls = [
-      '''DROP TABLE users;''',
-      '''DROP TABLE todos;''',
-      '''
-        CREATE TABLE todos (
-          id TEXT PRIMARY KEY, 
-          title TEXT NOT NULL,
-          desc TEXT,
-          status TEXT,
-          start INTEGER,
-          end INTEGER,
-          created INTEGER,
-          updated INTEGER
-        );
-      '''
-    ];
-
+  FutureOr<void> _onUpgradeDatabase(
+      Database db, int oldVersion, int newVersion) async {
     try {
-      for (var ddl in ddls) {
+      for (var ddl in mainDatabaseDdlUpdate) {
         await db.execute(ddl);
       }
     } catch (e) {

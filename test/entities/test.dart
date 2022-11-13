@@ -12,9 +12,9 @@ void testEntities() {
 }
 
 void testMethodsEntities(IEntity entity) {
-  entity.toMap();
+  final map = entity.toMap();
 
-  entity.fromMap({ 'title': 'New Project'});
+  entity.fromMap(map);
 
   entity.getFields();
 

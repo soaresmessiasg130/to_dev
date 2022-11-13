@@ -15,7 +15,7 @@ void testTodoService() {
 
     final newTodo = Todo(title: 'New Todo', id: getUuid());
 
-    service.add(newTodo);
+    await service.add(newTodo);
   });
 
   test('Testing TodoService method: remove()', () async {
@@ -23,7 +23,7 @@ void testTodoService() {
 
     final newTodo = Todo(title: 'New Todo', id: getUuid());
 
-    service.add(newTodo);
+    await service.add(newTodo);
 
     final countAfterAdd = service.count;
 
@@ -31,20 +31,20 @@ void testTodoService() {
       expect(service.count, lessThan(countAfterAdd));
     });
 
-    service.remove(newTodo);
+    await service.remove(newTodo);
   });
 
   test('Testing TodoService method: removeAll()', () async {
     final service = TodoService();
 
     for (int i = 1; i < 3; i++) {
-      service.add(Todo(title: 'New Todo', id:  getUuid()));
+      await service.add(Todo(title: 'New Todo', id:  getUuid()));
     }
 
     service.addListener(() {
       expect(service.count, equals(0));
     });
 
-    service.removeAll();
+    await service.removeAll();
   });
 }

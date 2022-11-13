@@ -16,12 +16,11 @@ class HomeWidget extends StatefulWidget {
 
 class _HomeWidgetState extends State<HomeWidget> {
   Future<void> onPressedFloatingButton(BuildContext context) async {
-    await DialogDefault()
-      .activateDialog(
-        context, 
-        const CreateSomethingModal(),
-        title: 'Create something',
-      );
+    await DialogDefault().activateDialog(
+      context,
+      CreateSomethingModal(context: context),
+      title: 'Create something',
+    );
   }
 
   @override
@@ -29,7 +28,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => TodoService(),
+          create: (_) => TodoService(),
         ),
       ],
       child: Scaffold(
