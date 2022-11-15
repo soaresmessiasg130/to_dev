@@ -8,9 +8,7 @@ import '../../entities/todo.dart';
 import '../../services/todo_service.dart';
 
 class CreateTodoForm extends StatefulWidget {
-  final BuildContext context;
-
-  const CreateTodoForm({Key? key, required this.onGoBack, required this.context}) : super(key: key);
+  const CreateTodoForm({Key? key, required this.onGoBack}) : super(key: key);
 
   final VoidCallback onGoBack;
 
@@ -45,16 +43,10 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
     if (_formKey.currentState!.validate()) {
       final newTodo = Todo(id: getUuid(), title: 'New Todo', desc: 'Desc');
 
-      await Provider.of<TodoService>(widget.context, listen: false).add(newTodo);
+      final service = Provider.of<TodoService>(context, listen: false);
+
+      await service.add(newTodo);
     }
-
-    Navigator.of(context).pop();
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Done'),
-      ),
-    );
   }
 
   @override
@@ -111,7 +103,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                 child: const Text('Go back'),
               ),
               ElevatedButton(
-                  onPressed: onSave,
+                  onPressed: () async => await onSave(),
                   child: const Text('Save'),
                 )
             ],

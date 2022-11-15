@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/modules/components/bottom_bar.dart';
-import 'package:to_dev/app/modules/components/dialog_default.dart';
 import 'package:to_dev/app/modules/components/floating_button.dart';
-import 'package:to_dev/app/modules/home/components/create_something_modal.dart';
+import 'package:to_dev/app/modules/home/components/create_something.dart';
 import 'package:to_dev/app/services/todo_service.dart';
+
+import '../components/default_dialog.dart';
 
 class HomeWidget extends StatefulWidget {
   const HomeWidget({Key? key}) : super(key: key);
@@ -15,20 +16,14 @@ class HomeWidget extends StatefulWidget {
 }
 
 class _HomeWidgetState extends State<HomeWidget> {
-  Future<void> onPressedFloatingButton(BuildContext context) async {
-    await DialogDefault().activateDialog(
-      context,
-      CreateSomethingModal(context: context),
-      title: 'Create something',
-    );
-  }
+  final todoService = TodoService();
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (_) => TodoService(),
+          create: (context) => todoService,
         ),
       ],
       child: Scaffold(
@@ -44,7 +39,11 @@ class _HomeWidgetState extends State<HomeWidget> {
         ),
         floatingActionButton: FloatingButton(
           tooltip: 'Create',
-          onPressed: onPressedFloatingButton,
+          onPressed: () async => defaultDialog(
+            context: context,
+            title: 'Create something',
+            content: const CreateSomething(),
+          ),
         ),
         bottomNavigationBar: BottomBar(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FloatingButton extends StatelessWidget {
   final String tooltip;
-  final void Function(BuildContext context) onPressed;
+  final void Function()? onPressed;
 
   const FloatingButton({
     Key? key,
@@ -15,7 +15,7 @@ class FloatingButton extends StatelessWidget {
     return Visibility(
       visible: MediaQuery.of(context).viewInsets.bottom == 0,
       child: FloatingActionButton(
-        onPressed: () => onPressed(context),
+        onPressed: onPressed,
         tooltip: tooltip,
         backgroundColor: Theme.of(context).primaryColor,
         foregroundColor: Colors.white,
