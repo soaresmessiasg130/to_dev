@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:to_dev/app/modules/components/create_todo_form.dart';
 
-import '../../../entities/todo.dart';
-import '../../../services/todo_service.dart';
-
 class CreateSomething extends StatefulWidget {
-  const CreateSomething(this.todoService, {Key? key}) : super(key: key);
-
-  final TodoService todoService;
+  const CreateSomething({Key? key}) : super(key: key);
 
   @override
   State<CreateSomething> createState() => _CreateSomethingState();
@@ -27,12 +21,7 @@ class _CreateSomethingState extends State<CreateSomething> {
   Widget build(BuildContext context) {
     if (creationMode == 2) {
       return CreateTodoForm(
-        onGoBack: () => setState(
-          () {
-            creationMode = 0;
-          },
-        ),
-        onSave: (Todo todo) async => {await widget.todoService.add(todo)},
+        callbackSuccess: () => Navigator.of(context).pop(),
       );
     }
 

@@ -10,12 +10,10 @@ import '../../services/todo_service.dart';
 class CreateTodoForm extends StatefulWidget {
   const CreateTodoForm({
     Key? key,
-    required this.onGoBack,
-    required this.onSave,
+    required this.callbackSuccess,
   }) : super(key: key);
 
-  final VoidCallback onGoBack;
-  final Future<Set<void>> Function(Todo todo) onSave;
+  final VoidCallback callbackSuccess;
 
   @override
   State<CreateTodoForm> createState() => _CreateTodoFormState();
@@ -42,17 +40,6 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
     descController.dispose();
 
     super.dispose();
-  }
-
-  Future<void> onSave() async {
-    if (_formKey.currentState!.validate()) {
-      await widget.onSave(
-        Todo(
-          id: getUuid(),
-          title: 'csacKJsa cJ c aca jacs',
-        ),
-      );
-    }
   }
 
   @override
@@ -105,13 +92,28 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: widget.onGoBack,
+                onPressed: widget.callbackSuccess,
                 child: const Text('Go back'),
               ),
-              ElevatedButton(
-                onPressed: () async => await onSave(),
-                child: const Text('Save'),
-              )
+              Consumer<TodoService>(
+                builder: (_, service, __) {
+                  return ElevatedButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        await service.add(
+                          Todo(
+                            id: getUuid(),
+                            title: 'csacKJsa cJ c aca jacs',
+                          ),
+                        );
+
+                        widget.callbackSuccess();
+                      }
+                    },
+                    child: const Text('Save'),
+                  );
+                },
+              ),
             ],
           ),
         ],
