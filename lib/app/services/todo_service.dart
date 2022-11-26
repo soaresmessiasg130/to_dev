@@ -6,7 +6,8 @@ import 'package:to_dev/app/interfaces/irepository.dart';
 import 'package:to_dev/app/repositories/repository.dart';
 
 class TodoService extends ChangeNotifier {
-  final IRepository<Todo> _repository = Repository(model: Todo(id: '', title: ''));
+  final IRepository<Todo> _repository =
+      Repository(model: Todo(id: '', title: ''));
 
   List<Todo> _items = [];
 
@@ -15,7 +16,11 @@ class TodoService extends ChangeNotifier {
   int get count => _items.length;
 
   TodoService() {
-    Future.microtask(() async => _items = await _repository.getAll());
+    Future.microtask(() async {
+      _items = await _repository.getAll();
+
+      notifyListeners();
+    });
   }
 
   Future<void> add(Todo item) async {

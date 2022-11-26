@@ -12,9 +12,9 @@ dynamic defaultDialog(
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Expanded(
+              Expanded(
                 child: Text(
-                  'scacsja nkcanjckjanskc nsakn ck s ajn kca s csac sa sca',
+                  title,
                   softWrap: true,
                   maxLines: 3,
                 ),

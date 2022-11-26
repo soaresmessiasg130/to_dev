@@ -8,13 +8,18 @@ class DashboardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        children: [
-          Text(Provider.of<TodoService>(context).toString()),
-          const Text('Dashboard'),
-        ],
-      ),
+    return Consumer<TodoService>(
+      builder: (_, todoService, __) {
+        final count = todoService.count.toString();
+
+        return Center(
+          child: Row(
+            children: [
+              Text('$count Todo Services'),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -8,9 +8,14 @@ import '../../entities/todo.dart';
 import '../../services/todo_service.dart';
 
 class CreateTodoForm extends StatefulWidget {
-  const CreateTodoForm({Key? key, required this.onGoBack}) : super(key: key);
+  const CreateTodoForm({
+    Key? key,
+    required this.onGoBack,
+    required this.onSave,
+  }) : super(key: key);
 
   final VoidCallback onGoBack;
+  final Future<Set<void>> Function(Todo todo) onSave;
 
   @override
   State<CreateTodoForm> createState() => _CreateTodoFormState();
@@ -41,11 +46,12 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
 
   Future<void> onSave() async {
     if (_formKey.currentState!.validate()) {
-      final newTodo = Todo(id: getUuid(), title: 'New Todo', desc: 'Desc');
-
-      final service = Provider.of<TodoService>(context, listen: false);
-
-      await service.add(newTodo);
+      await widget.onSave(
+        Todo(
+          id: getUuid(),
+          title: 'csacKJsa cJ c aca jacs',
+        ),
+      );
     }
   }
 
@@ -103,9 +109,9 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                 child: const Text('Go back'),
               ),
               ElevatedButton(
-                  onPressed: () async => await onSave(),
-                  child: const Text('Save'),
-                )
+                onPressed: () async => await onSave(),
+                child: const Text('Save'),
+              )
             ],
           ),
         ],

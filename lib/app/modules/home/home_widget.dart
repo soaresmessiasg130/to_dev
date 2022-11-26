@@ -23,7 +23,7 @@ class _HomeWidgetState extends State<HomeWidget> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => todoService,
+          create: (_) => todoService,
         ),
       ],
       child: Scaffold(
@@ -42,7 +42,7 @@ class _HomeWidgetState extends State<HomeWidget> {
           onPressed: () async => defaultDialog(
             context: context,
             title: 'Create something',
-            content: const CreateSomething(),
+            content: CreateSomething(todoService),
           ),
         ),
         bottomNavigationBar: BottomBar(),
