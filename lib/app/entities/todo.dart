@@ -9,11 +9,11 @@ part 'todo.g.dart';
 class Todo extends IEntity {
   String title;
   String? desc;
-  Status? status = Status.waiting;
-  DateTime? start = getUtcNow();
-  DateTime? end = getUtcTomorow();
-  DateTime? created = getUtcNow();
-  DateTime? updated = getUtcNow();
+  Status? status;
+  DateTime? start;
+  DateTime? end;
+  DateTime? created;
+  DateTime? updated;
 
   Todo({
     required String id,
@@ -26,7 +26,11 @@ class Todo extends IEntity {
     this.updated,
   }) : super(
           id: id,
-        );
+        ) {
+    status ??= Status.waiting;
+    created ??= getUtcNow();
+    updated ??= getUtcNow();
+  }
 
   @override
   IEntity fromMap(Map<String, dynamic> map) => _$TodoFromJson(map);
