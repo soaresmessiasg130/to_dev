@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/modules/components/date_input.dart';
 import 'package:to_dev/app/modules/components/time_input.dart';
+import 'package:to_dev/app/utils/date.dart';
 import 'package:to_dev/app/utils/uuid.dart';
 
 import '../../entities/todo.dart';
+import '../../enums/status.dart';
 import '../../services/todo_service.dart';
 
 class CreateTodoForm extends StatefulWidget {
@@ -103,7 +105,9 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                         await service.add(
                           Todo(
                             id: getUuid(),
-                            title: 'csacKJsa cJ c aca jacs',
+                            title: descController.text,
+                            status: Status.waiting,
+                            end: getUtcTomorow(),
                           ),
                         );
 
