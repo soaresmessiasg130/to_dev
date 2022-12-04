@@ -27,12 +27,12 @@ class BottomBar extends StatelessWidget {
       width: 24,
     ),
     IconButton(
-      tooltip: 'Search',
-      onPressed: () => Modular.to.navigate('search'),
+      tooltip: 'Wallet',
+      onPressed: () => Modular.to.navigate('wallet'),
       color: Colors.white,
       padding: const EdgeInsets.all(16),
       icon: const Icon(
-        Icons.search,
+        Icons.account_balance_wallet,
       ),
     ),
     IconButton(

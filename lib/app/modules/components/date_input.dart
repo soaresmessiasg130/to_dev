@@ -3,8 +3,11 @@ import 'package:intl/intl.dart';
 
 class DateInput extends StatefulWidget {
   final String restorationId;
+  final Function(DateTime) onChange;
 
-  const DateInput({Key? key, required this.restorationId}) : super(key: key);
+  const DateInput(
+      {Key? key, required this.restorationId, required this.onChange})
+      : super(key: key);
 
   @override
   State<DateInput> createState() => _DateInputState();
@@ -48,8 +51,8 @@ class _DateInputState extends State<DateInput> with RestorationMixin {
           restorationId: 'date_picker_dialog',
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(2022),
-          lastDate: DateTime(2023),
+          firstDate: DateTime(DateTime.now().year - 10),
+          lastDate: DateTime(DateTime.now().year + 10),
         );
       },
     );
@@ -62,6 +65,8 @@ class _DateInputState extends State<DateInput> with RestorationMixin {
             DateTime(value.year, value.month, value.day);
 
         _selectedDate.value = newSelectedDateValue;
+
+        widget.onChange(value);
       });
     }
   }

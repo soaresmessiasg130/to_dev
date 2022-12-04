@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({Key? key}) : super(key: key);
+class WalletWidget extends StatelessWidget {
+  const WalletWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Search'),
+      child: Text('Wallet'),
     );
   }
 }

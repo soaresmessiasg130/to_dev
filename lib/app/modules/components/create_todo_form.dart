@@ -13,9 +13,11 @@ class CreateTodoForm extends StatefulWidget {
   const CreateTodoForm({
     Key? key,
     required this.callbackSuccess,
+    required this.callbackCancel,
   }) : super(key: key);
 
   final VoidCallback callbackSuccess;
+  final VoidCallback callbackCancel;
 
   @override
   State<CreateTodoForm> createState() => _CreateTodoFormState();
@@ -24,6 +26,7 @@ class CreateTodoForm extends StatefulWidget {
 class _CreateTodoFormState extends State<CreateTodoForm> {
   final _formKey = GlobalKey<FormState>();
   final descController = TextEditingController();
+  late DateTime? dateEnd;
   late FocusNode descFocusNode;
 
   @override
@@ -80,9 +83,15 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                   const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
-                    children: const [
-                      DateInput(restorationId: 'date_input'),
-                      TimeInput(restorationId: 'time_input'),
+                    children: [
+                      DateInput(
+                          restorationId: 'date_input',
+                          onChange: (value) {
+                            setState(() {
+                              dateEnd = value;
+                            });
+                          }),
+                      const TimeInput(restorationId: 'time_input'),
                     ],
                   ),
                 ],
@@ -94,7 +103,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               TextButton(
-                onPressed: widget.callbackSuccess,
+                onPressed: widget.callbackCancel,
                 child: const Text('Go back'),
               ),
               Consumer<TodoService>(
@@ -107,7 +116,8 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                             id: getUuid(),
                             title: descController.text,
                             status: Status.waiting,
-                            end: getUtcTomorow(),
+                            start: getUtcNow(),
+                            end: dateEnd?.toUtc(),
                           ),
                         );
 

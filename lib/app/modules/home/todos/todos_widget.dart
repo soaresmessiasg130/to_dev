@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_dev/app/services/todo_service.dart';
@@ -57,6 +55,9 @@ class _TodosWidgetState extends State<TodosWidget> {
                 children: [
                   Text(
                     todos[i].title,
+                  ),
+                  Text(
+                    todos[i].end.toString(),
                   ),
                   TextButton(
                     child: Text(

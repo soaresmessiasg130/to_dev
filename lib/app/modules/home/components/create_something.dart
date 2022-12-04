@@ -22,6 +22,9 @@ class _CreateSomethingState extends State<CreateSomething> {
     if (creationMode == 2) {
       return CreateTodoForm(
         callbackSuccess: () => Navigator.of(context).pop(),
+        callbackCancel: () => setState(() {
+          creationMode = 0;
+        }),
       );
     }
 
