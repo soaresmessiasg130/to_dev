@@ -1,5 +1,5 @@
 DateTime getUtcNow() {
-  final date = DateTime.now().toLocal();
+  final date = DateTime.now().toUtc();
 
   return date;
 }

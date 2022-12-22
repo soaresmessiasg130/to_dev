@@ -26,8 +26,15 @@ class CreateTodoForm extends StatefulWidget {
 class _CreateTodoFormState extends State<CreateTodoForm> {
   final _formKey = GlobalKey<FormState>();
   final descController = TextEditingController();
-  late DateTime? dateEnd;
   late FocusNode descFocusNode;
+
+  Todo todo = Todo(
+    id: getUuid(),
+    title: '',
+    start: getUtcNow(),
+    end: getUtcTomorow(),
+    status: Status.waiting,
+  );
 
   @override
   void initState() {
@@ -54,7 +61,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Todo\'s description'),
+          const Text('Todo'),
           const SizedBox(height: 8),
           TextFormField(
             controller: descController,
@@ -66,8 +73,13 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
 
               return null;
             },
+            onChanged: (value) {
+              setState(() {
+                todo.title = value;
+              });
+            },
             decoration: const InputDecoration(
-              hintText: 'Todo\'s description',
+              hintText: 'Description',
               border: OutlineInputBorder(),
             ),
           ),
@@ -88,7 +100,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                           restorationId: 'date_input',
                           onChange: (value) {
                             setState(() {
-                              dateEnd = value;
+                              todo.end = value;
                             });
                           }),
                       const TimeInput(restorationId: 'time_input'),
@@ -111,15 +123,7 @@ class _CreateTodoFormState extends State<CreateTodoForm> {
                   return ElevatedButton(
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        await service.add(
-                          Todo(
-                            id: getUuid(),
-                            title: descController.text,
-                            status: Status.waiting,
-                            start: getUtcNow(),
-                            end: dateEnd?.toUtc(),
-                          ),
-                        );
+                        await service.add(todo);
 
                         widget.callbackSuccess();
                       }

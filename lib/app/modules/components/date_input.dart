@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:to_dev/app/utils/date.dart';
 
 class DateInput extends StatefulWidget {
   final String restorationId;
@@ -14,7 +15,7 @@ class DateInput extends StatefulWidget {
 }
 
 class _DateInputState extends State<DateInput> with RestorationMixin {
-  final RestorableDateTime _selectedDate = RestorableDateTime(DateTime.now());
+  late final RestorableDateTime _selectedDate = RestorableDateTime(getUtcNow());
 
   late final RestorableRouteFuture<DateTime?> _restorableDatePickerRouteFuture =
       RestorableRouteFuture<DateTime?>(
@@ -51,8 +52,8 @@ class _DateInputState extends State<DateInput> with RestorationMixin {
           restorationId: 'date_picker_dialog',
           initialEntryMode: DatePickerEntryMode.calendarOnly,
           initialDate: DateTime.fromMillisecondsSinceEpoch(arguments! as int),
-          firstDate: DateTime(DateTime.now().year - 10),
-          lastDate: DateTime(DateTime.now().year + 10),
+          firstDate: DateTime(getUtcNow().year - 10),
+          lastDate: DateTime(getUtcNow().year + 10),
         );
       },
     );
